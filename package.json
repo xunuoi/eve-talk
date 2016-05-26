@@ -1,0 +1,34 @@
+{
+  "name": "robot",
+  "private": true,
+  "version": "0.0.0",
+  "description": "a Sails application",
+  "keywords": [],
+  "dependencies": {
+    "include-all": "~0.1.6",
+    "rc": "1.0.1",
+    "sails": "~0.12.3",
+    "sails-disk": "~0.10.9"
+  },
+  "scripts": {
+    "debug": "node debug app.js",
+    "start": "node app.js"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/wxu/robot.git"
+  },
+  "author": "wxu",
+  "license": "",
+  "devDependencies": {
+    "babel-core": "^6.9.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "gulp": "^3.9.0",
+    "iconv": "^2.2.0",
+    "sails-hook-babel": "^6.0.1",
+    "swig": "^1.4.2"
+  }
+}
