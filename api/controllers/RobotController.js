@@ -6,10 +6,12 @@
  */
 
 var path = require('path');
-var spider = require('./robot/spider/spider');
-var ut = require('./robot/core/util');
-var eve = require('./robot/core/eve');
+var spider = require('./robot/spider/spider')
+var ut = require('./robot/core/util')
+var eve = require('./robot/core/eve')
 
+// init global obj and eve
+eve.init();
 
 
 export function message(req, res){

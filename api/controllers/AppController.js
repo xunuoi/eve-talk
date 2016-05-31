@@ -7,12 +7,15 @@
 
 
 function index(req, res){
-    DBService.client.get('pet')
+    res.render('app/index', {
+        'pet': 'dog'
+    })
+    /*DBService.client.get('pet')
     .then(function (val) {
         res.render('app/index', {
             'pet': val
         })
-    })
+    })*/
 }
 
 

@@ -23,7 +23,7 @@ gulpman.config({
     'dist_views': 'views_dist',
 
     'runtime_assets': 'static',
-    'dist_assets': 'static_dist',
+    'dist_assets': 'static_static',
 
     'lib': 'lib', 
 

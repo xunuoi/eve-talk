@@ -1,5 +1,7 @@
-"use strict";
-/* == DEFINE Inner Conf OBJECT == */
+/**
+ * For robot config
+ */
+
 var _confData = {
 /* == BASE64 IMG SROUCE == */
     _imgSource:{
@@ -16,5 +18,4 @@ exports.getB64Img = function(name){
     return _confData._imgSource[name];
 };
 
-/* /config ============================================================ */
 

@@ -1,11 +1,11 @@
-var $, G,
-    //diction
-    noun, verb, oD;
-var db = DBService.client;
- 
+/**
+ * For Robot Util
+ */
+
+import { createClient } from 'then-redis'
+
 var emoji = require('../emoji/main.js');
 var $ = require('../lib/stone');
-var G = require('../dict/dict');
 
     
 var ut = {
@@ -50,12 +50,17 @@ var ut = {
         // $.each
     },
     save: function(){
-        db.set('wordsDict', JSON.stringify(G.wordsDict));
-        db.set('ansDict', JSON.stringify(G.ansDict));
-        db.set('context', JSON.stringify(G.context));
-        console.log('>> Redis save succeed!')
+        var G = global.G
+        var db = createClient()
+
+        db.set('wordsDict', JSON.stringify(G.wordsDict))
+        db.set('ansDict', JSON.stringify(G.ansDict))
+        db.set('context', JSON.stringify(G.context))
+        console.log('>> Redis save succeed.')
     },
     get: function(what, cb){
+        var db = createClient()
+        
         return db.get(what)
         .then(function(rs){
             cb ? cb(JSON.parse(rs)) : '';

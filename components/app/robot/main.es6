@@ -1,25 +1,23 @@
 /*
- * For mtRobert
+ * For Robot
  * @Author: Cloud Xu
  * xwlxyjk@gmail.com
  * 31th September 2014 
  */
 
 
-var mtConfig = require('./robert.config'),
+var robotConf = require('./robot.config'),
+    record = require('./record'),
+    hooks = require('./hooks/hook'),
     stone = require('./stone.bro'),
-    bg = require('./bgTrans');
+    bg = require('../bgTrans');
 
 //config set
 var conf = {}, enableSocket = false;
 
 var socket;
-//CONSTRUCTOR FUNCTION
-/*
- * Role By Born
- * Task By Get
- */
-var Gen = function(){};
+
+// remove a workflow
 var Kill = function(tar){
     if(tar ==  undefined) {return false; }
 
@@ -33,7 +31,7 @@ var Kill = function(tar){
     return true;        
 };
 
-var robert = function(){
+var robot = function(){
     var INFO = {name: 'Eve', age: 1};
     var _myConf = {
         'contextmenu': false
@@ -68,51 +66,14 @@ var robert = function(){
 
         //
         'noop': stone.noop
-    };
-
-    var record = function(){
-        var inputList = [],
-            pos = 0,
-            len = 0;
-
-        var exp = {
-            save: function(str){
-                inputList.push(str);
-                len++;
-                pos = len;
-            },
-            getPre: function(){
-                if(pos == 0){
-                    return inputList[0];
-                }else {
-                    return inputList[--pos];
-                }
-            },
-            getNext: function(){
-                if(pos >= len-1){
-                    return inputList[len-1];
-                }else {
-                    return inputList[++pos];
-                }
-            },
-            print: function(str){
-                var cur = str || inputList[pos];
-                $goinput.val(cur);
-            },
-            printPre: function(){
-                this.print(this.getPre());
-            },
-            printNext: function(){
-                this.print(this.getNext());
-            }
-        }
-        return exp;
-    }();
+    };    
 
     //Local Shared Vars =====================
     var $goinput = $('.x-rb-dialog-input');
     //Lazy Shared Vars
     var $ctn, $body, $dialog, $continput, $gobtn, $talkcont   
+
+    record = record.init($goinput)
     //=============================================
     var exports = {};
     exports.dialog = function(){
@@ -147,7 +108,7 @@ var robert = function(){
         dataObj.placeholder = dataObj.placeholder || 'Chat with me';
        
         $continput.val('').attr('placeholder',dataObj.placeholder);
-        $gobtn.find('.x-rb-goimg').attr('src', mtConfig.getB64Img('arrow_0'));
+        $gobtn.find('.x-rb-goimg').attr('src', robotConf.getB64Img('arrow_0'));
         $talkcont.html(dataObj.response).slideDown();
     };
 
@@ -194,6 +155,26 @@ var robert = function(){
 
         return true;             
     };
+
+    exports.checkHooks = function(word){
+        let len = hooks.list.length
+        let rs = true
+
+        for(let i=0;i<len;i++){
+            let hookFn = hooks.list[i]
+
+            if(hookFn(word, exports) !== false){
+
+            }else {
+                rs = false
+                break;
+            }
+        }
+
+        return rs
+    }
+
+
     exports.read = function(word){
         /*if(word.match(/::/)){
             this.learn(word, function(res){
@@ -259,20 +240,20 @@ var robert = function(){
     };
 
     exports.hide = function(){
-        $('#x_robert_ctn').attr('x-robert-display', 'hide').fadeOut('slow');
-        $.cookie('isRobertShow', 'false');
+        $('#x_robot_ctn').attr('x-robot-display', 'hide').fadeOut('slow');
+        $.cookie('isrobotShow', 'false');
     };
     exports.show = function(){
-        $('#x_robert_ctn').attr('x-robert-display', 'show').fadeIn();
-        $.cookie('isRobertShow', 'true');
+        $('#x_robot_ctn').attr('x-robot-display', 'show').fadeIn();
+        $.cookie('isrobotShow', 'true');
     };
 
     exports.action = function(){
         var _curAction = 'normal';
 
         var baseImgSrc = conf.imgBasePath || '/static/app/robot/img/';
-        $body = $('#x_robert_body');
-        $ctn = $('#x_robert_ctn');
+        $body = $('#x_robot_body');
+        $ctn = $('#x_robot_ctn');
 
         var Action = function(actionName, img, actAuto, injectFn){
             var $bdImg = $body.find('.x-rb-body-img');
@@ -350,14 +331,14 @@ var robert = function(){
     exports.ui = function(){
         var exp1 = {};
         exp1.savePos = function(){
-            var posX = $('#x_robert_ctn').css('left');
-            var posY = $('#x_robert_ctn').css('top');
-            localStorage.robertPosX = posX;
-            localStorage.robertPosY = posY;
+            var posX = $('#x_robot_ctn').css('left');
+            var posY = $('#x_robot_ctn').css('top');
+            localStorage.robotPosX = posX;
+            localStorage.robotPosY = posY;
         };
         exp1.readPos = function(){
-            if(localStorage.robertPosX){
-                $('#x_robert_ctn').css({'left': localStorage.robertPosX, 'top': localStorage.robertPosY});
+            if(localStorage.robotPosX){
+                $('#x_robot_ctn').css({'left': localStorage.robotPosX, 'top': localStorage.robotPosY});
             }
         };
 
@@ -378,14 +359,14 @@ var robert = function(){
 
         exp1.init = function(){
 
-            $ctn = $('#x_robert_ctn').attr('x-robert-inited', 'true');
-            $body = $('#x_robert_body');
-            $dialog = $('#x_robert_dialog');
+            $ctn = $('#x_robot_ctn').attr('x-robot-inited', 'true');
+            $body = $('#x_robot_body');
+            $dialog = $('#x_robot_dialog');
             $continput = $('.x-rb-dialog-input');
             $gobtn = $('#x_rb_btngo');
             $talkcont = $('.x_rbchatcont');
 
-            $ctn.fadeIn('slow').attr('x-robert-display', 'show')
+            $ctn.fadeIn('slow').attr('x-robot-display', 'show')
             .bind('click', function (event) {
                 var $target = $(stone.getTarget(event));
                 $target.hasClass('x-rb-body-img') ? ($dialog.is(':hidden') ? exp1.showMenu($ctn ,$body, $dialog) : exp1.hideMenu($ctn ,$body, $dialog) ) : '';                  
@@ -427,11 +408,13 @@ var robert = function(){
 
             $gobtn.click(function(event){
                 var word = $goinput.val();
-                $gobtn.find('.x-rb-goimg').attr('src', mtConfig.getB64Img('loading_0'));                        
+                $gobtn.find('.x-rb-goimg').attr('src', robotConf.getB64Img('loading_0'));                        
                 
                 record.save(word);
 
-                exports.read(word);
+                if(exports.checkHooks(word) !== false){
+                    exports.read(word);
+                }
             });
             /*$(window).resize(function(){
 
@@ -443,17 +426,17 @@ var robert = function(){
         return exp1;
     }();
     exports.auto = function(){
-        if(stone.ins( $.cookie('isRobertShow'),['true', null]) ){
-            robert.ui.init();
-            robert.show();
+        if(stone.ins( $.cookie('isrobotShow'),['true', null]) ){
+            robot.ui.init();
+            robot.show();
         } 
         return this;           
     };
     exports.init = function(){
-        var $rbctn = $('#x_robert_ctn');
+        var $rbctn = $('#x_robot_ctn');
 
-        if($rbctn.attr('x-robert-inited') == 'true'){
-            if($rbctn.attr('x-robert-display') == 'hide'){
+        if($rbctn.attr('x-robot-inited') == 'true'){
+            if($rbctn.attr('x-robot-display') == 'hide'){
                 exports.show();
             }else {
                 exports.hide();
@@ -489,7 +472,7 @@ var Messenger = function(forWho){
     attr.forWho = forWho;
     attr.getMes = function(hash){
         var forWho = forWho;
-        var rs = mtConfig.getRobertData('mes', attr.forWho, hash);
+        var rs = robotConf.getrobotData('mes', attr.forWho, hash);
         return rs;
     };
 
@@ -498,8 +481,8 @@ var Messenger = function(forWho){
 //WORKFLOW LIST
 var _WorkFlow = {
 
-    'robert': function(){
-        robert.auto();
+    'robot': function(){
+        robot.auto();
     },
     'parallax':function(){
         var scene = document.getElementById('bg_scene');
@@ -561,7 +544,7 @@ var _WorkFlow = {
                 console.warn('Socket Disconnected!')
             });
             // socket.emit('message', { from: 'client' });
-            socket.on('response', robert.onAnswer);
+            socket.on('response', robot.onAnswer);
 
         });
     }
@@ -577,7 +560,7 @@ exports.workFlow = function(){
     };
     exp1.add = function(wfName, wf, fn){
         _WorkFlow[wfName] = wf;
-        fn ? fn() : '';//callback fn,can be mtRobert.auto(wfName);
+        fn ? fn() : '';//callback fn,can be mtrobot.auto(wfName);
     };
     exp1.remove = function(wfName){
         delete _WorkFlow[wfName];
@@ -587,7 +570,7 @@ exports.workFlow = function(){
     return exp1;
 }();
 //****** exported to global;
-exports.Eve = robert;
+exports.Eve = robot;
 
 exports.auto = function(wlist){
     var self = this;
@@ -610,7 +593,7 @@ exports.init = function(conf_){
     conf = conf_
     //init default workFlow
     exports.auto([
-        'robert', 
+        'robot', 
         // 'parallax', 
         // 'bgTrans',
         // 'sayHello',
@@ -620,5 +603,3 @@ exports.init = function(conf_){
     ]);
 
 }; 
-
-//END: Robert 

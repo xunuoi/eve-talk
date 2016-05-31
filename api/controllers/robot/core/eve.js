@@ -7,7 +7,7 @@
 var LD = require('../lib/LD.js'),
     $ = require('../lib/stone.js'),
     ut = require('./util.js'),
-    // robert = require('../lib/robert/main.js'),
+
     emoji = require('../emoji/main.js'),
     // exercise = require('./exercise.js'),
     //social map
@@ -17,9 +17,12 @@ var LD = require('../lib/LD.js'),
 
     Task = require('./task'),
     //EXPORTED TO GLOBAL 
-    Context = require('./context');
+    Context = require('./context'),
 
-import * as G from '../dict/dict'
+    D = require('../dict/dict');
+
+
+var G;
 
 
 /**
@@ -135,6 +138,7 @@ function supplySubject(str){
  * @return {[type]}     [description]
  */
 function learn (str) {
+
     var lesson = str.split('::'),
         a = lesson[0].toLocaleLowerCase(),//提问
         b = lesson[1];//回答
@@ -279,22 +283,25 @@ function answer (a) {
     // $.log(G.wordsDict);
     // $.log(G.ansDict);
 }
+
+
 //main worker ===================
 exports.init = function(){
 
-    //Set Init Params ====================
-    
+    //init global object G
+    G = global.G = D
+
     ut.get('wordsDict', function(rs){
         G.wordsDict = rs || {};
-        // console.log('G.wordDict', rs);
+        console.log('G.wordDict\n', rs);
     });//问答字典
     ut.get('ansDict',function(rs){
         G.ansDict = rs || {};
-        // console.log('G.ansDict',rs);
+        console.log('G.ansDict\n',rs);
     });//问答字典
     ut.get('context', function(rs){
         G.context = Context.create(rs);//new Context(rs);
-        // console.log('G.context',rs);
+        console.log('G.context\n',rs);
     });//问答字典
 
     console.log('>>Eve Init Succeed!')

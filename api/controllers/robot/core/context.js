@@ -3,8 +3,6 @@
  * @param {[type]} c [description]
  */
 
-var G = require('../dict/dict')
-
 function Context(c){
     c ? '' : c = {};
 
@@ -25,9 +23,8 @@ Context.prototype.clear = function(lastKey){
  */
 //记录上下文历史
 function cacheContext(key){
-    return true;
     //key是当前；
-    var cc = G.context,
+    var cc = global.G.context,
         historyLen = cc.history.length;
 
     cc.history.push(key);
@@ -78,9 +75,7 @@ function cacheContext(key){
     }
     // cc.last = key;
 }
-exports.init = function (G_) {
-    G = G_;
-}
+
 exports.cache = cacheContext;
 exports.create = function(foo){
     return new Context(foo);
