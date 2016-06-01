@@ -10,6 +10,8 @@ var robotConf = require('./robot.config'),
     record = require('./record'),
     hooks = require('./hooks/hook'),
     stone = require('./stone.bro'),
+    emoji = require('../emoji/main'),
+    speaker = require('./speaker'),
     bg = require('../bgTrans');
 
 //config set
@@ -82,6 +84,10 @@ var robot = function(){
   
         }).keydown(function(event){
             // stone.killEvent(event);
+            if(event.keyCode === 18){
+                $('#speaker_btn').trigger('click')
+                return false
+            }
 
             if(stone.inArray(event.keyCode, [13, 37, 39])){
                 $('#content').attr('keyEventTimeStamp', event.timeStamp);
@@ -95,7 +101,7 @@ var robot = function(){
             }else if(event.keyCode == 40){
                 record.printNext();
             }else {
-                //
+                // pass
             }
 
         });
@@ -103,13 +109,19 @@ var robot = function(){
         var exp1 = {};
 
     }();///exports.dialog
-    exports.showResponse = function (dataObj) {
+    exports.showResponse = function (dataObj, isNotClear) {
         $dialog.show();
-        dataObj.placeholder = dataObj.placeholder || 'Chat with me';
+        dataObj.placeholder = dataObj.placeholder || 'Chat with me'
        
-        $continput.val('').attr('placeholder',dataObj.placeholder);
+        $continput.attr('placeholder', dataObj.placeholder)
+
         $gobtn.find('.x-rb-goimg').attr('src', robotConf.getB64Img('arrow_0'));
-        $talkcont.html(dataObj.response).slideDown();
+        
+        var emojiImg = dataObj.emoji ? emoji.get(dataObj.emoji) : ''
+        
+        $talkcont.html(emojiImg+dataObj.response).slideDown();
+
+        $continput.select()
     };
 
     exports.runCmdFn = function(cmd, cmdFnObj){
@@ -156,19 +168,48 @@ var robot = function(){
         return true;             
     };
 
+    exports.lockStatus = function(handler, statusId){
+        if(this._status) return false
+        else {
+            this._status = handler.name || statusId
+            this._statusHanler = handler
+            return true
+        }
+    }
+
+    exports.releaseStatus = function(status){
+        delete this._status
+        delete this._statusHanler
+    }
+
     exports.checkHooks = function(word){
+        var commonHookResult = hooks.commonHook(word, this)
+        if(commonHookResult === false){
+            return false
+        }
+
+        if(this._status){
+            return this._statusHanler(word, this)
+        }
+
         let len = hooks.list.length
         let rs = true
 
         for(let i=0;i<len;i++){
-            let hookFn = hooks.list[i]
 
-            if(hookFn(word, exports) !== false){
+            let hookFn = hooks.list[i]
+            let hookRs = hookFn(word, exports)
+
+            if(hookRs === false){
+                rs = hookRs
+                break;
+            }else if(hookRs === undefined || hookRs === true){
 
             }else {
-                rs = false
-                break;
+                rs = word = hookRs
+
             }
+            
         }
 
         return rs
@@ -406,16 +447,7 @@ var robot = function(){
             $dialog.click(function(event){/*stone.killEvent(event);*/})
             .mousemove(function(event){stone.killEvent(event);});
 
-            $gobtn.click(function(event){
-                var word = $goinput.val();
-                $gobtn.find('.x-rb-goimg').attr('src', robotConf.getB64Img('loading_0'));                        
-                
-                record.save(word);
-
-                if(exports.checkHooks(word) !== false){
-                    exports.read(word);
-                }
-            });
+            $gobtn.click(event=>exports.onInput(event));
             /*$(window).resize(function(){
 
                 $ctn.css({'left': '60px', 'bottom': '60px'});                        
@@ -425,6 +457,31 @@ var robot = function(){
 
         return exp1;
     }();
+
+    exports.setInput = function(val){
+        $continput.val(val)
+    }
+    exports.getInput = function(){
+        return $continput
+    }
+
+    exports.onInput = function(event){
+        var word = $goinput.val();
+        $gobtn.find('.x-rb-goimg').attr('src', robotConf.getB64Img('loading_0'));                        
+        
+        record.save(word);
+
+        var hookResult = exports.checkHooks(word)
+
+        if(hookResult === undefined || hookResult === true){
+            exports.read(word)
+        }else if(hookResult === false){
+            // keep hook result, not read
+        }else {
+            exports.read(hookResult)
+        }
+    }
+
     exports.auto = function(){
         if(stone.ins( $.cookie('isrobotShow'),['true', null]) ){
             robot.ui.init();
@@ -481,10 +538,16 @@ var Messenger = function(forWho){
 //WORKFLOW LIST
 var _WorkFlow = {
 
-    'robot': function(){
-        robot.auto();
+    robot (){
+        robot.auto()
+        
     },
-    'parallax':function(){
+
+    speaker (){
+        speaker.init(robot)
+    },
+
+    parallax (){
         var scene = document.getElementById('bg_scene');
         var parallax = new Parallax(scene);
         // parallax.enable();
@@ -498,14 +561,17 @@ var _WorkFlow = {
         parallax.friction(0.2, 0.8);
         parallax.origin(0.0, 1.0);
     },
-    'bgTrans': function(){
+
+    bgTrans () {
         bg.init();
         $('.introduce-wrapper').removeClass('hide');
     },
-    'install': function(){
+
+    install (){
         localStorage['installed'] = true;
     },
-    'sayHello': function(){
+
+    sayHello () {
         var isInstalled = localStorage['installed'];
 
         var timeN = stone.getUpper(stone.getTimeName());
@@ -517,10 +583,12 @@ var _WorkFlow = {
             bg.play('Good|'+timeN+'|I|Am|Eve|#rectangle|#countdown 3');
         }
     },
-    'clearTag': function(){
+
+    clearTag (){
         $('body > script').remove();
     },
-    'initSocket': function(){
+
+    initSocket (){
         var url = 'ws://localhost:3000';
 
         if(location.href.search('cloud.vzhen.com') != -1){
@@ -593,7 +661,8 @@ exports.init = function(conf_){
     conf = conf_
     //init default workFlow
     exports.auto([
-        'robot', 
+        'robot',
+        'speaker',
         // 'parallax', 
         // 'bgTrans',
         // 'sayHello',

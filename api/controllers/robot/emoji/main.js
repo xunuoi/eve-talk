@@ -1,3 +1,6 @@
+/**
+ * For robot
+ */
 
 var imgTag = '<img src=":@=src" />',
     basePath = '/static/app/emoji/img/',

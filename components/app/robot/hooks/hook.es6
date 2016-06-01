@@ -1,14 +1,31 @@
 import {help} from './help'
-import {fly} from './fly'
+import {compareApp} from './compareApp'
 
 
 let list = [
     help,
-    fly
+    compareApp
 ]
+
+function commonHook(word, eve){
+    if(word.match(/[cC]lear\s*([sS]tage)?/)){
+        $('.chart-docker').empty();
+        eve.showResponse({
+            placeholder: 'new subject',
+            response: 'stage is clear now'
+        });
+
+        eve.releaseStatus()
+
+        return false
+    }
+}
+
+
 
 
 export {
-    list
+    list,
+    commonHook
 }
 

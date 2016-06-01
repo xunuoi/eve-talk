@@ -8,7 +8,7 @@ var LD = require('../lib/LD.js'),
     $ = require('../lib/stone.js'),
     ut = require('./util.js'),
 
-    emoji = require('../emoji/main.js'),
+    // emoji = require('../emoji/main.js'),
     // exercise = require('./exercise.js'),
     //social map
     social = require('./social.js'),
@@ -79,7 +79,7 @@ function checkMeaning(a, b){
         if(word in G.noun && $.inArray(word, gl_1)){
             bExistSameNoun = true;
 
-            var verb_0_index = i-1;
+            var verb_0_index = i-1,
                 verb_0 = gl_0[verb_0_index],
                 verb_1_index = gl_1.indexOf(word) - 1,
                 verb_1 = gl_1[verb_1_index];
@@ -207,14 +207,14 @@ function answer (a) {
         return ut.ansFormat({
             status: 7,
             message: 'failed',
-            data: 'Sorry, please input something, it\'s not good to keep empty',
+            data: 'Please say something,do not keep it blank',
             emoji: 'dance'
         });
     }
     a = a.toLocaleLowerCase();
     var ccStatus = Context.cache(a);
     if(ccStatus !== true){
-        //准备清除记忆
+        // to clear the context cache
         Task.preClearContextCache();
 
         return ut.ansFormat(ccStatus);
@@ -226,7 +226,7 @@ function answer (a) {
     // console.log(G.ansDict)
     if(ans) {
         // console.log(ans);
-        //如果存在，返回随机回答
+        //if exist, choose the random answers
         var len = ans.length,
             limit = Math.floor((Math.random()*10)%len);
         return ut.ansFormat({
@@ -236,7 +236,7 @@ function answer (a) {
             });
 
     }else {
-        //不存在，那么寻找最大近似值
+        //if not exist, choose the max-similar value
 
         $.each(G.wordsDict, function  (k, v) {
             var filtered_a = ut.filter(a),
@@ -245,16 +245,16 @@ function answer (a) {
             // var bMeaningSimilar = checkMeaning(a, k);
             var bMeaningSimilar = checkMeaning(filtered_a, filtered_k);
             // console.log(bMeaningSimilar);
-            //如果语义无异义，那么按照LD来计算
+            //if the meaning is not different, then calculate by LD
             if(bMeaningSimilar){
                 var sPercent = LD.getLdPercent(a, k),
                     //裁切空格之后的
                     trimedPercent = LD.getLdPercent(ut.trim(a), ut.trim(k)),
                     filteredPercent = LD.getLdPercent(filtered_a, filtered_k);
 
-                //如果相似性达到0.6，那么归类为同一组
+                // if similar >=0.6, then set in the same group
                 if(sPercent >= 0.6 || trimedPercent >= 0.6 || filteredPercent >= 0.6){
-                    v.push(a);//将提问归类
+                    v.push(a);// classify the ans
                     G.ansDict[a] = G.ansDict[k];
                 }
             }

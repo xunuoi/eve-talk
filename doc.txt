@@ -1,0 +1,117 @@
+Doc
+
+
+H: Hi Robot
+
+*R: Hi guy
+
+H: wake up buddy, showtime
+
+*R: okay, I am ready
+
+
+H: Introduct your self
+
+*R: Hi everyone, good morning. I am the assistant for appannie product user. I can enhance the user experience
+
+[in wechat app detail page]
+
+H: Can you tell me how to download CSV ?
+
+*R: Here focs on the button. or you can directily click here to download CSV in this current page.
+
+H:where is the api announcement ?
+
+*R: just here click:xxxxx
+
+
+H: Well... Can you show me the Revenu of the wechat ?
+
+
+[ Chart rendered ]
+*R: Anything else ?
+
+H: 2016-2-12 to 2016-3-21
+
+[chart updated]
+
+H: China
+
+[chart updated]
+
+
+H: Download chart ?
+
+[Chart rendered with #date and country inputed above, they are saved#]
+
+
+
+*R:OK check it.
+
+
+H: Compare with other app ?
+
+
+*R: Just input the app name
+
+
+H: facebook
+
+[Chart appended]
+
+*R: check it
+
+
+H:clear the stage
+
+[cleared]
+
+*R: anything ?
+
+H: Show me the Ad Revenue chart 
+
+[chart rendered]
+
+*R: finished
+
+H: show me the top chart 
+
+[chart rendered]
+
+H: Downlaod of Wechat 
+
+[chart rendered ]
+
+
+#quick switch#
+*H: [view the history panel, 3d Effect, and he scrol the chart ,and then choose the Ad Revenue chart. ]
+
+#split panel
+
+all the chart is plain layouted on the page
+
+
+H: save collection
+
+
+*R: This coleciont is saved . You can visit this unique url.
+
+[H click the url]
+
+
+H:nice job
+
+*R: Thanks
+
+H:last thing to ask you
+
+*R: say that
+
+H: Do you think we would win in this Hackmarathon ?
+
+*R: Oooooooooof course .
+
+
+H:Thanks. bye
+
+

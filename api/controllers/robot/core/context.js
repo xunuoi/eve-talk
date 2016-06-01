@@ -59,7 +59,7 @@ function cacheContext(key){
         return {
             status: 3,
             message: 'pause',
-            data: 'What a bored man! Just shut up,body',
+            data: 'What a bored man!',
             emoji: 'bored'
         };
     }else if(cc.sequentRecord[key] >= 4){
@@ -67,7 +67,7 @@ function cacheContext(key){
         return {
             status: 3,
             message: 'pause',
-            data: 'Is it a lot of fun to say one again by again ？',
+            data: 'Is it funny to say one thing again and again ？',
             emoji: 'cute'
         };
     }else {

@@ -1,19 +1,26 @@
-define(function(require, exports, module){
+/**
+ * FE ROBOT
+ * For Front End
+ */
+
 
 var imgTag = '<img src=":@=src" />',
-    basePath = './emoji/img/',
+    basePath = '/static/app/emoji/img/',
     emojiDict = {
         'cute': 'cute.gif',
         'happy': 'happy.jpg',
         'crazy': 'crazy.gif',
         'shy': 'shy.jpg',
         'smile': 'smile.jpg',
-        'lalal': 'lalala.gif',
+        'lalala': 'lalala.gif',
         'wow': 'wow.jpg',
         'yeah': 'yeah.jpg',
         'bored': 'bored.gif',
         'dai': 'dai.gif',
+        'dance': 'dance.gif'
     };
+
+
 function emojiImg(em){
     var n = emojiDict[em];
     if(n){
@@ -23,9 +30,12 @@ function emojiImg(em){
     }
     
 }
+
+
 function render(mark, data){
     return imgTag.replace(':@='+mark, data);
 }
+
 
 var emutil = {
     get: function(em){
@@ -40,6 +50,4 @@ var emutil = {
 }
 
 
-
 module.exports = emutil;
-});

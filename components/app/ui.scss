@@ -329,10 +329,9 @@ body,
 
 
 // for bg and
-
-html, body{
-    // background: url('/static/app/img/soft-index-bg.jpg') no-repeat !important;
+html, body, .body--ready{
     background: white;
+    // background: url('/static/app/img/soft-index-bg.jpg') no-repeat !important;
 }
 .hide {
     display: none;

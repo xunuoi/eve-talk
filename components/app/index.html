@@ -7,19 +7,21 @@
 <meta name="author" content="appannie">
 <meta name="version" content="1.0">
 <link rel="icon" href="../favicon.ico">
-<link rel="stylesheet" type="text/css" href="./main.css?_gm_inline">
+<link rel="stylesheet" type="text/css" href="./main.css">
 </head>
 <body id="bg_scene">
-
 <canvas data-depth="0.40" class="canvas layer"></canvas>
 <div class="introduce-wrapper hide">
 <p>Appannie</p>
 </div>
 
+{% include 'app/content.html' %}
+
+
 {% include 'app/bg.html' %}
 {% include 'app/robot/robot.html' %}
-<script type="text/javascript" src="../lib/jquery.js"></script>
-<script type="text/javascript" src="../lib/jquery.extra.js"></script>
+{% include 'app/common_script.html' %}
+
 <script type="text/javascript" src="./main.js"></script>
 </body>
 </html>
