@@ -94,7 +94,7 @@ all the chart is plain layouted on the page
 H: save collection
 
 
-*R: This coleciont is saved . You can visit this unique url.
+*R: This coleciont is saved . You can visit this unique url. So you can quickly get your report in this collection.
 
 [H click the url]
 
