@@ -2,8 +2,20 @@
  * For compare apps
  */
 
+let $stage
+
+function blurBg(){
+    $("#header, #menu, #wrapper").addClass('blur-stage')
+}
+
+function restoreBg(){
+    $("#header, #menu, #wrapper").removeClass('blur-stage')
+}
+
+
+
 function areaChart(){
-    $('.chart-docker').eq(1).highcharts({
+    $stage.find('[data-target="compare"]').highcharts({
         chart: {
             type: 'area'
         },
@@ -32,7 +44,7 @@ function areaChart(){
 
 function downloadChart(){
     $(function () {
-        $('.chart-docker').eq(0).highcharts({
+        $stage.find('[data-target="compare-download"]').highcharts({
             title: {
                 text: 'Monthly Average Temperature',
                 x: -20 //center
@@ -114,7 +126,7 @@ function compareAppSession(word, eve){
     }
 
     if(word.match(/[fF]ace[bB]ook/)){
-
+        blurBg()
         areaChart()
 
         eve.showResponse({
@@ -135,6 +147,11 @@ function compareAppSession(word, eve){
     return false
     
 }
+
+
+$(()=>{
+    $stage = $('.stage-docker')
+})
 
 
 export function compareApp(word, eve){

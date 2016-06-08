@@ -1,0 +1,23 @@
+/**
+ * For stage
+ */
+
+.stage-docker {
+    position: absolute;
+    z-index: 900;
+    right: 20px;
+    top: 60px;
+    width: 480px;
+    // height: 220px;
+}
+
+
+#header, #wrapper, #menu {
+    -webkit-transition: -webkit-filter 0.3s ease-in;
+    transition: -webkit-filter 0.3s ease-in;
+}
+body .blur-stage {
+    -webkit-filter: blur(10px);
+    filter: blur(10px);
+}
+
