@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="./dashboard_files/pe-icon-7-stroke.css">
     <link rel="stylesheet" href="./dashboard_files/helper.css">
     <link rel="stylesheet" href="./dashboard_files/style.css">
+    <link rel="stylesheet" type="text/css" href="../app/robot/robot.css">
     <style type="text/css">
     .jqstooltip {
         position: absolute;
@@ -114,7 +115,7 @@
             <div class="small-logo">
                 <span class="text-primary">App Annie APP</span>
             </div>
-            <form role="search" class="navbar-form-custom" method="post" action="http://webapplayers.com/homer_admin-v1.9/index.html#">
+            <form role="search" class="navbar-form-custom" method="post" action="#">
                 <div class="form-group">
                     <input type="text" placeholder="Search App or Publisher" class="form-control" name="search">
                 </div>
@@ -1108,8 +1109,13 @@
             <span class="pull-right">Example text</span> Company 2015-2020
         </footer>
     </div>
+
+    <!-- Robot html -->
+    {% include 'app/robot/robot.html' %}
+
     <!-- Vendor scripts -->
     <script src="./dashboard_files/jquery.min.js"></script>
+    <script type="text/javascript" src="../lib/jquery.extra.js"></script>
     <script src="./dashboard_files/jquery-ui.min.js"></script>
     <script src="./dashboard_files/jquery.slimscroll.min.js"></script>
     <script src="./dashboard_files/bootstrap.min.js"></script>
@@ -1125,6 +1131,7 @@
     <!-- App scripts -->
     <script src="./dashboard_files/homer.js"></script>
     <script src="./dashboard_files/charts.js"></script>
+    <script type="text/javascript" src="../lib/highcharts-4.2.5/highcharts.js"></script>
     <script>
     $(function() {
 
@@ -1247,6 +1254,9 @@
         })()
     } catch (e) {}
     </script>
+
+    <!-- Robot init -->
+    <script type="text/javascript" src="../app/main.js"></script>
 </body>
 
 </html>

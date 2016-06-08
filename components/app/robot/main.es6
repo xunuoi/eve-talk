@@ -664,8 +664,8 @@ exports.init = function(conf_){
         'robot',
         'speaker',
         // 'parallax', 
-        'bgTrans',
-        'sayHello',
+        // 'bgTrans',
+        // 'sayHello',
         'install', 
         'clearTag'
         // 'initSocket'

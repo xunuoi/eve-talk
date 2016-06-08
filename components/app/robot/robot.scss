@@ -6,7 +6,7 @@
 
 
 .span6 {
-width: 570px;
+    width: 570px;
 }
 .f-blue {
     color: blue;
@@ -29,18 +29,20 @@ padding: 3px 8px;
 color: #FFF;
 text-align: center;
 text-decoration: none;
-background-color: #000;
+// background-color: #000;
+background-color: #68A521;
 -webkit-border-radius: 4px;
 -moz-border-radius: 4px;
 border-radius: 4px;
-border: 1px solid #4D4D4D;
+// border: 1px solid #4D4D4D;
 }
 
 .tooltip.right .tooltip-arrow {
 top: 32px;
 left: 0;
 margin-top: -5px;
-border-right-color: #000;
+// border-right-color: #000;
+border-right-color: #68A521;
 border-width: 5px 5px 5px 0;
 }
 
@@ -64,7 +66,7 @@ input[type="text"].x-rb-dialog-input {
     transition: border linear .2s,box-shadow linear .2s;
 }
 
-.btn {
+/* .btn {
 display: inline-block;
 padding: 4px 12px;
 margin-bottom: 0;
@@ -100,13 +102,13 @@ box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),0 1px 2px rgba(0, 0, 0, 0.05)
 border-color: #C5C5C5;
 border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25);
 }
-
+ */
 .x-robot-ctn { position: fixed; /*top: 300px;*/ bottom: 40px; left: 40px; height: 72px; z-index: 999;  cursor: pointer; }
 
 #x_robot_body img {width: 70px;}
 
-.x-rb-dialog { opacity: 0.8; top: -6px; left: 66px; cursor: auto;}
-.x-rb-dialog .tooltip-inner { max-width: 200px; margin-left: 0px;}
+.x-rb-dialog { opacity: 0.85; top: -6px; left: 66px; cursor: auto;}
+.x-rb-dialog .tooltip-inner { max-width: 220px; margin-left: 0px;}
 #x_robot_ctn .rb-input-li{margin-bottom: 6px;}
 #x_robot_ctn .x-rb-dialog-input { 
     outline: none;
@@ -116,18 +118,28 @@ border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25);
     color: #1D1D1D;
 }
 .x-rb-btn-go {
-    padding-bottom: 1px;
-    padding-top: 1px;
-    padding-left: 4px;
-    padding-right: 5px;
+    padding: 0;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    font-size: 25px;
+    background: #FFF;
+
     margin-left: 3px;
     border-radius: 14px;
     font-family: 'Calibri, Arial, sans-serif';
     color: #6F6C6C!important;
     margin-bottom: 2px;
+
+    .go-icon {
+        line-height: inherit;
+    }
 }
 #x_rb_btngo .x-rb-goimg {width: 13px; height: 12px; /*margin-bottom: 3px;*/}
-#x_robot_ctn .x-rb-wordtip { margin-top: 4px;}
+#x_robot_ctn .x-rb-wordtip { 
+    margin-top: 5px; 
+    margin-bottom: 5px;
+}
 #x_robot_ctn .x_rbchatcont{
     text-align: left;
     display: none;
