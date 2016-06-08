@@ -1310,7 +1310,6 @@ module.exports =  {
 
 	getUpper: function(str, pos){
 		var pos = pos || 0;
-		console.log(str[pos]);
 		var rsStr = str[pos].toUpperCase()+str.slice(pos+1);
 
 		return rsStr;

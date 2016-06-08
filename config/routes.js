@@ -32,8 +32,10 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': 'AppController',
-  '/dashboard': 'DashboardController',
+  '/': 'AppController.index',
+  '/dashboard': 'DetailController.index',
+  '/collection': 'DetailController.collection',
+
   '/message': 'RobotController.message'
 
   /***************************************************************************
