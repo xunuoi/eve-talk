@@ -19,6 +19,12 @@ function commonHook(word, eve){
 
         return false
     }
+
+    if(word.match(/^[s|S]how\s+[l|L]oading\b/)){
+
+        $('#loading_splash').show();
+        return false
+    }
 }
 
 

@@ -298,12 +298,13 @@ S.UI = (function () {
   }
 
   // Init
-  init();
+  // init();
 
   return {
     simulate: function (action) {
       performAction(action);
     },
+    init: init,
     play: play
   }
 }());
@@ -345,8 +346,12 @@ S.UI.Tabs = (function () {
     bindEvents();
   }
 
+  return {
+    'init': init
+  }
+
   // Init
-  init();
+  // init();
 }());
 
 
@@ -723,6 +728,8 @@ S.Shape = (function () {
 }());
 
 exports.init = function(){
+  S.UI.init();
+  S.UI.Tabs.init();
   S.init();
 };
 exports.play = function(val){

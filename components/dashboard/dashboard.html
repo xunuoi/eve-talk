@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="./dashboard_files/pe-icon-7-stroke.css">
     <link rel="stylesheet" href="./dashboard_files/helper.css">
     <link rel="stylesheet" href="./dashboard_files/style.css">
+    <link rel="stylesheet" type="text/css" href="../app/robot/robot.css">
     <style type="text/css">
     .jqstooltip {
         position: absolute;
@@ -82,12 +83,12 @@
 
 <body class="fixed-navbar fixed-sidebar">
     <!-- Simple splash screen-->
-    <div class="splash" style="display: none;">
+    <div id="loading_splash" class="splash">
         <div class="color-line"></div>
         <div class="splash-title">
-            <h1>Homer - Responsive Admin Theme</h1>
+            <h1>App Annie - Build a better app business</h1>
             <p>
-                Special Admin Theme for small and medium webapp with very clean and aesthetic style and feel.
+                App Annie delivers data and insights to succeed in the app economy.
             </p>
             <div class="spinner">
                 <div class="rect1"></div>
@@ -1147,8 +1148,13 @@
             <span class="pull-right">Example text</span> Company 2015-2020
         </footer>
     </div>
+
+    <!-- Robot html -->
+    {% include 'app/robot/robot.html' %}
+
     <!-- Vendor scripts -->
     <script src="./dashboard_files/jquery.min.js"></script>
+    <script type="text/javascript" src="../lib/jquery.extra.js"></script>
     <script src="./dashboard_files/jquery-ui.min.js"></script>
     <script src="./dashboard_files/jquery.slimscroll.min.js"></script>
     <script src="./dashboard_files/bootstrap.min.js"></script>
@@ -1164,6 +1170,7 @@
     <!-- App scripts -->
     <script src="./dashboard_files/homer.js"></script>
     <script src="./dashboard_files/charts.js"></script>
+    <script type="text/javascript" src="../lib/highcharts-4.2.5/highcharts.js"></script>
     <script>
     $(function() {
 
@@ -1286,6 +1293,9 @@
         })()
     } catch (e) {}
     </script>
+
+    <!-- Robot init -->
+    <script type="text/javascript" src="../app/main.js"></script>
 </body>
 
 </html>

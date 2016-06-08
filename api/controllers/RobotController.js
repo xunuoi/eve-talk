@@ -11,7 +11,7 @@ var ut = require('./robot/core/util')
 var eve = require('./robot/core/eve')
 
 // init global obj and eve
-eve.init();
+eve.init()
 
 
 export function message(req, res){
