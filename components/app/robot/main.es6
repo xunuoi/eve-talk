@@ -42,7 +42,7 @@ var robot = function(){
         {
             html: 'menu1',
             click: function (event) {
-                alert('ddd');
+                alert('menu');
             }
         }
     ];
@@ -80,7 +80,9 @@ var robot = function(){
     var exports = {};
     exports.dialog = function(){
         $goinput.click(function(event){
-            stone.killEvent(event);
+
+            $goinput.select();
+            stone.killEvent(event)
   
         }).keydown(function(event){
             // stone.killEvent(event);

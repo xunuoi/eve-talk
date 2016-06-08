@@ -7,14 +7,22 @@ let list = [
     compareApp
 ]
 
+function restoreBg(){
+    $("#header, #menu, #wrapper").removeClass('blur-stage')
+}
+
+
 function commonHook(word, eve){
     if(word.match(/[cC]lear\s*([sS]tage)?/)){
         $('.chart-docker').empty();
+        restoreBg();
+
         eve.showResponse({
             placeholder: 'new subject',
             response: 'stage is clear now'
         });
 
+    
         eve.releaseStatus()
 
         return false
