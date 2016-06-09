@@ -143,11 +143,12 @@ border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25);
     color: #1D1D1D;
 }
 .x-rb-btn-go {
+    overflow: hidden;
     padding: 0;
     width: 22px;
     height: 22px;
     line-height: 22px;
-    font-size: 25px;
+    font-size: 29px;
     background: #FFF;
     margin-left: 3px;
     border-radius: 14px;
@@ -157,6 +158,8 @@ border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25);
 
     .go-icon {
         line-height: inherit;
+        position: relative;
+        left: -2px;
     }
 }
 #x_rb_btngo .x-rb-goimg {

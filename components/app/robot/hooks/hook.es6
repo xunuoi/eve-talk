@@ -1,4 +1,9 @@
+/**
+ * Hook Modules
+ */
+
 import {help} from './help'
+import {blurBg, restoreBg, loadingCover} from '../../ui'
 import {compareApp} from './compareApp'
 
 
@@ -7,11 +12,6 @@ let list = [
     compareApp
 ]
 
-function restoreBg(){
-    $("#header, #menu, #wrapper").removeClass('blur-stage')
-}
-
-
 function commonHook(word, eve){
     if(word.match(/[cC]lear\s*([sS]tage)?/)){
         $('.chart-docker').empty();
@@ -19,7 +19,7 @@ function commonHook(word, eve){
 
         eve.showResponse({
             placeholder: 'new subject',
-            response: 'stage is clear now'
+            response: 'Stage is clear now'
         });
 
     
@@ -28,14 +28,12 @@ function commonHook(word, eve){
         return false
     }
 
-    if(word.match(/^[s|S]how\s+[l|L]oading\b/)){
-
-        $('#loading_splash').show();
+    if(word.match(/^[s|S]how\s+[l|L]oading(\s+[u|U][iI])?\b/)){
+        eve.selectInput()
+        loadingCover()
         return false
     }
 }
-
-
 
 
 export {

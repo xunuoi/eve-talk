@@ -10,6 +10,7 @@ var robotConf = require('./robot.config'),
     record = require('./record'),
     hooks = require('./hooks/hook'),
     stone = require('./stone.bro'),
+    uiHelper = require('../ui'),
     emoji = require('../emoji/main'),
     speaker = require('./speaker'),
     bg = require('../bgTrans');
@@ -99,9 +100,11 @@ var robot = function(){
                 $('#x_rb_btngo').trigger('click');
                 stone.killEvent(event);
             }else if(event.keyCode == 38){
-                record.printPre();
+                record.printPre()
             }else if(event.keyCode == 40){
-                record.printNext();
+                record.printNext()
+            }else if(event.keyCode == 27){
+                uiHelper.loadingUncover()
             }else {
                 // pass
             }
@@ -465,6 +468,9 @@ var robot = function(){
     }
     exports.getInput = function(){
         return $continput
+    }
+    exports.selectInput = function(){
+        $continput.select()
     }
 
     exports.onInput = function(event){
