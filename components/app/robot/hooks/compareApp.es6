@@ -2,20 +2,14 @@
  * For compare apps
  */
 
+import {blurBg, restoreBg} from '../../ui'
+
+
 let $stage
-
-function blurBg(){
-    $("#header, #menu, #wrapper").addClass('blur-stage')
-}
-
-function restoreBg(){
-    $("#header, #menu, #wrapper").removeClass('blur-stage')
-}
-
 
 
 function areaChart(){
-    $stage.find('[data-target="compare"]').highcharts({
+    $stage.find('.chart-docker[data-target="compare"]').show().find('#facebook_chart').highcharts({
         chart: {
             type: 'area'
         },

@@ -1,0 +1,9 @@
+
+.app-icon {
+    width: 36px;
+    border-radius: 6px;
+}
+
+.app-icon.app-icon-md {
+    width: 72px;
+}

@@ -4,20 +4,35 @@
 
 .stage-docker {
     position: absolute;
-    z-index: 900;
+    z-index: 1900;
     right: 20px;
     top: 60px;
-    width: 480px;
+    width: 640px;
+
+    >.chart-docker {
+        display: none;
+    }
     // height: 220px;
 }
 
 
-#header, #wrapper, #menu {
+
+
+.transFilter {
     -webkit-transition: -webkit-filter 0.3s ease-in;
+    -moz-transition: -moz-filter 0.3s ease-in;
     transition: -webkit-filter 0.3s ease-in;
 }
+
 body .blur-stage {
-    -webkit-filter: blur(10px);
-    filter: blur(10px);
+    -webkit-filter: blur(12px);
+    filter: blur(12px);
+    @extend .transFilter;
+}
+
+body .restore-stage {
+    -webkit-filter: none;
+    filter: none;
+    @extend .transFilter;
 }
 
