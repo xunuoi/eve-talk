@@ -3,10 +3,15 @@ let $mainContent
 
 
 function blurBg(){
+    // @debug
+    
+    $('.stage-overlay').addClass('show')
+    return
     $mainContent.addClass('blur-stage')
 }
 
 function restoreBg(){
+    $('.stage-overlay').removeClass('show')
     $mainContent
     .addClass('restore-stage')
     .removeClass('blur-stage')

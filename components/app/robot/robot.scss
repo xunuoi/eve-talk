@@ -179,8 +179,13 @@ border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25);
     margin-bottom: 10px;
     padding: 6px 4px 4px 7px;
     min-height: 48px;
-    line-height: 18px;    /*padding-left: 4px; */
+    line-height: 18px;
+    a {
+        color: #FF5722;
+        text-decoration: underline;
+    }
 
+    /*padding-left: 4px; */
     /*padding-right: 4px;   */
 }
 // for speaker

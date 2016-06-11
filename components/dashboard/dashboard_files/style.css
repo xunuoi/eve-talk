@@ -1577,7 +1577,8 @@ body {
 .fixed-navbar #header {
   width: 100%;
   position: fixed;
-  z-index: 1000;
+  /*z-index: 1000;*/
+  z-index: 990;
 }
 .fixed-navbar #wrapper {
   top: 62px;
@@ -2302,6 +2303,19 @@ body.fullscreen-panel-mode {
 #side-menu li.active {
   background: #fff;
 }
+#side-menu li.current {
+  background: #4FC15A;
+  color: #FFF;
+}
+
+#side-menu.nav li.current a:hover, #side-menu.nav li.current a:focus {
+  background: #4FC15A;
+}
+
+#side-menu li.current a{
+  color: #FFF;
+}
+
 .arrow {
   float: right;
 }

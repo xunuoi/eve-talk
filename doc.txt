@@ -1,6 +1,14 @@
 Doc
 
 
+We have 2 Abilities:
+
+1. Data collected/focus
+2. Responsive UI
+
+
+======================
+
 H: Hi Robot
 
 *R: Hi guy

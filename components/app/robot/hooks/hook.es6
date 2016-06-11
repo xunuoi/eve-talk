@@ -14,7 +14,8 @@ let list = [
 
 function commonHook(word, eve){
     if(word.match(/[cC]lear\s*([sS]tage)?/)){
-        $('.chart-docker').empty();
+        $('.chart-docker-body').empty()
+        $('.chart-docker').hide();
         restoreBg();
 
         eve.showResponse({
