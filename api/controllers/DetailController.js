@@ -10,8 +10,15 @@ module.exports = {
         res.render('dashboard/dashboard')
     },
     
-	collection: function (req, res) {
-        res.render('dashboard/collection')
+	favorite: function (req, res) {
+        res.render('dashboard/favorite')
+    },
+
+    insights: function(req, res){
+        res.render('dashboard/insights')
+    },
+    insightsDetail: function(req, res){
+        res.render('dashboard/insights_detail')
     }
 };
 

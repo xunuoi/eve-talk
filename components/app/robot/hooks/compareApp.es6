@@ -139,7 +139,7 @@ function compareAppSession(word, eve){
 
     if(word.match(/[a|A]dd\s+(to\s+)?favorites?/)){
         
-        $('.chart-docker').addClass('ani-to-favorite')
+        // $('.chart-docker').addClass('ani-to-favorite')
 
         eve.showResponse({
             placeholder: 'Add to favorite',

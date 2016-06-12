@@ -76,10 +76,10 @@ $(function () {
      * Pie Chart Data
      */
     var pieChartData = [
-        { label: "Data 1", data: 16, color: "#62cb31", },
-        { label: "Data 2", data: 6, color: "#A4E585", },
-        { label: "Data 3", data: 22, color: "#368410", },
-        { label: "Data 4", data: 32, color: "#8DE563", }
+        { label: "Apple", data: 16, color: "#62cb31", },
+        { label: "Google", data: 6, color: "#A4E585", },
+        { label: "MI", data: 22, color: "#368410", },
+        { label: "Others", data: 32, color: "#8DE563", }
     ];
 
     /**
@@ -150,5 +150,5 @@ $(function () {
         }
     };
 
-    $.plot($("#flot-line-chart"), lineChartData, lineChartOptions);
+    // $.plot($("#flot-line-chart"), lineChartData, lineChartOptions);
 });
