@@ -120,7 +120,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-3">
-                    <div class="hpanel">
+                    <div class="hpanel following-apps">
                         <div class="panel-body text-center h-200">
                             <i class="pe-7s-share fa-4x"></i>
                             <h1 class="m-xs">147</h1>
@@ -223,7 +223,7 @@
             </div>
             <div class="row">
                  <div class="col-lg-3">
-                    <div class="hpanel">
+                    <div class="hpanel top-charts">
                         <div class="panel-heading">
                             <div class="panel-tools">
                                 <a class="showhide">
@@ -236,7 +236,7 @@
                             Top charts
                         </div>
                         <div class="panel-body list">
-                            <div class="pull-right">
+                            <div class="pull-right top-charts-market">
                                 <a class="btn btn-xs btn-success">Amazon</a>
                                 <a class="btn btn-xs btn-default">IOS</a>
                                 <a class="btn btn-xs btn-default">TV</a>
@@ -246,7 +246,7 @@
                                 <a class="btn btn-xs btn-default">Windows</a>
                             </div>
                             <div class="panel-title pull-right">
-                                <div class="btn-group">
+                                <div class="btn-group top-charts-country">
                                     <button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle" aria-expanded="false">United States <span class="caret"></span></button>
                                     <ul class="dropdown-menu">
                                         <li><a>United States</a></li>
@@ -255,7 +255,7 @@
                                         <li><a>France</a></li>
                                     </ul>
                                 </div> -
-                                <div class="btn-group">
+                                <div class="btn-group top-charts-category">
                                     <button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle" aria-expanded="false">Overall <span class="caret"></span></button>
                                     <ul class="dropdown-menu">
                                         <li><a>Overall</a></li>
@@ -264,7 +264,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <a href="blog_details.html" class="btn btn-primary btn-xs">View all</a>
+                            <a href="blog_details.html" class="btn btn-primary btn-xs top-charts-more">View all</a>
                             <div class="list-item-container">
                                 <div class="list-item">
                                     <h6 class="no-margins text-primary">Goat Simulator Waste of Space</h6>
@@ -652,6 +652,67 @@
 
     <!-- Robot init -->
     <script type="text/javascript" src="../app/main.js"></script>
+
+    <script>
+    $(function() {
+            $('#tour').click(function() {
+            // Instance the tour
+            var tour = new Tour({
+                backdrop: true,
+            onShown: function(tour) {
+
+                // ISSUE    - https://github.com/sorich87/bootstrap-tour/issues/189
+                // FIX      - https://github.com/sorich87/bootstrap-tour/issues/189#issuecomment-49007822
+
+                // You have to write your used animated effect class
+                // Standard animated class
+                $('.animated').removeClass('fadeIn');
+                // Animate class from animate-panel plugin
+                $('.animated-panel').removeClass('zoomIn');
+
+            },
+              steps: [
+              {
+                element: ".following-apps",
+                title: "This is your following apps",
+                content: "The max is 100 Apps"
+              },
+              {
+                element: ".top-charts",
+                title: "Top charts Section",
+                content: "Top 5 Apps by country and market"
+              },
+              {
+                element: ".top-charts-market",
+                title: "Top charts Section",
+                content: "Clicking change market"
+              },
+              {
+                element: ".top-charts-country",
+                title: "Top charts Section",
+                content: "dropdown list change country"
+              },
+              {
+                element: ".top-charts-category",
+                title: "Top charts Section",
+                content: "dropdown list change category"
+              },
+              {
+                element: ".top-charts-more",
+                title: "Top charts Section",
+                content: "Clicking view more apps"
+              }
+            ]});
+
+            // Initialize the tour
+            tour.init();
+
+            // Start the tour
+            tour.restart();
+        });
+    })
+    
+    </script>
 </body>
 
 </html>
