@@ -80,11 +80,11 @@ function revenueColumnChart(){
             }
         },
         series: [{
-            name: 'Tokyo',
+            name: 'Wechat',
             data: [49.9, 71.5, 106.4, 129.2]
 
         }, {
-            name: 'New York',
+            name: 'Facebook',
             data: [83.6, 78.8, 98.5, 93.4]
 
         }]

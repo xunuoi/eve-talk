@@ -5,10 +5,12 @@
 import {help} from './help'
 import {blurBg, restoreBg, loadingCover} from '../../ui'
 import {compareApp} from './compareApp'
+import {downloadMap} from './downloadMap'
 
 
 let list = [
     help,
+    downloadMap,
     compareApp
 ]
 
