@@ -143,7 +143,7 @@ function compareAppSession(word, eve){
 
         eve.showResponse({
             placeholder: 'Add to favorite',
-            response: 'Add to favorite succeed!<br /> Click <a href="/collection" target="_blank" >here</a> to check',
+            response: 'Add to favorite succeed!<br /> Click <a href="/favorite" target="_blank" >Favorite</a> link to check it',
             // emoji: 'happy'
         })
 

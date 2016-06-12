@@ -205,4 +205,9 @@ $.fn['animatePanel'] = function() {
         $('.stagger').removeClass(effect).removeClass('animated-panel').removeClass('stagger');
     }, animateTime)
 
+
+function activeCurrentMenu(){
+
+}
+
 };

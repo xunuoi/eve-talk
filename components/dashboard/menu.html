@@ -81,8 +81,8 @@
             </div>
         </div>
         <ul class="nav" id="side-menu">
-            <li class="active current">
-                <a>
+            <li class="{% if current == 'dashboard' %}active current{% endif %}">
+                <a href="/dashboard">
                     <span class="nav-label">Dashboard</span>
                 </a>
             </li>
@@ -196,7 +196,7 @@
                     </li>
                 </ul>
             </li>
-            <li>
+            <li class="{% if current == 'insights' %}active current{% endif %}">
                 <a href="/insights">
                     <span class="nav-label">Insights</span>
                 </a>
@@ -232,9 +232,9 @@
                     </li>
                 </ul>
             </li>
-            <li>
-                <a>
-                    <span class="nav-label">Blog</span>
+            <li class="{% if current == 'favorite' %}active current{% endif %}">
+                <a href="/favorite">
+                    <span class="nav-label">Favorite</span>
                 </a>
             </li>
             <li>

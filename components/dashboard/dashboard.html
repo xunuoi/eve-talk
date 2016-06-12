@@ -26,7 +26,7 @@
     <!-- Header -->
     {% include 'dashboard/header.html' %}
     <!-- Navigation -->
-    {% include 'dashboard/menu.html' %}
+    {% include 'dashboard/menu.html' with {current: 'dashboard'} %}
     <!-- Main Wrapper -->
     <div id="wrapper">
         <div class="content animate-panel">
@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="text-center small">
-                                        <i class="fa fa-laptop"></i> Download in current month (December)
+                                        <i class="fa fa-laptop"></i> Download in latest week (current)
                                     </div>
                                     <div class="flot-chart" style="height: 160px">
                                         <div class="flot-chart-content" id="flot-line-chart" style="padding: 0px; position: relative;">
