@@ -333,7 +333,7 @@ var robot = function(){
 
         var exp1 = {};
 
-        exp1.sleep = new Action('sleep', 'ani_sleep.gif', function(rsSelf){
+        exp1.sleep = new Action('sleep', '0.png', function(rsSelf){
             var t_0 = stone.now();     
             var pos_0 = stone.mousePos();
             var pos_now = stone.mousePos();

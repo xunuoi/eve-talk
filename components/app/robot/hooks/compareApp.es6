@@ -92,9 +92,6 @@ function revenueColumnChart(){
 
 }
 
-
-
-
 function compareAppSession(word, eve){
     if(word.match('[sS]top')){
         eve.releaseStatus()
