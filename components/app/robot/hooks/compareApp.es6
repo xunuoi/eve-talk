@@ -175,11 +175,21 @@ function bindFavorite(){
     })
 }
 
+function bindClose(){
+    $('.stage-docker').on('click', '.chart-close-btn', function(event){
+        $(this).parents('.map-docker').hide()
+        $(this).parents('.chart-docker').hide()
+
+        return false
+    })
+}
+
 
 $(()=>{
     $stage = $('.stage-docker')
 
     bindFavorite()
+    bindClose()
 })
 
 

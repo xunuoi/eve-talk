@@ -2,6 +2,7 @@
  * For stage
  */
 
+$dockerWidth: 480px;
 
 // for filter =======================
 
@@ -49,7 +50,24 @@ body .restore-stage {
     z-index: 1900;
     right: 20px;
     top: 60px;
-    width: 480px;
+    width: $dockerWidth;
+
+    .chart-close-btn {
+        visibility: hidden;
+        z-index: 1;
+        position: absolute;
+        left: 2px;
+        top: 2px;
+        color: rgba(129, 191, 51, 0.79);
+    }
+
+    &:hover {
+        .chart-close-btn{
+            visibility: visible;
+
+        }
+    }
+
     >.chart-docker {
         display: none;
         transform: scale(1);
@@ -81,10 +99,11 @@ body .restore-stage {
 
     .map-docker {
         display: none;
-        width: 480;
-        height: 320px;
-        min-height: 320px;
+        width: $dockerWidth;
+        height: 340px;
+        // min-height: 320px;
         background-color: #000;
+        padding-top: 10px;
     }
 
     .add-favorite-btn.favorited{

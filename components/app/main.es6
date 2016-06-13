@@ -6,7 +6,71 @@ import {init as robotInit} from './robot/main'
 
 function initPage(argument) {
     robotInit()
+
+    bindLandingGuide()
     // setTimeout(()=>$('#loading_splash').fadeOut(()=>robotInit()), 2000)
+}
+
+
+function bindLandingGuide(){
+
+    $('#tour').click(function() {
+    // Instance the tour
+    var tour = new Tour({
+        backdrop: true,
+        onShown: function(tour) {
+
+            // ISSUE    - https://github.com/sorich87/bootstrap-tour/issues/189
+            // FIX      - https://github.com/sorich87/bootstrap-tour/issues/189#issuecomment-49007822
+
+            // You have to write your used animated effect class
+            // Standard animated class
+            $('.animated').removeClass('fadeIn');
+            // Animate class from animate-panel plugin
+            $('.animated-panel').removeClass('zoomIn');
+
+        },
+          steps: [
+          {
+            element: ".following-apps",
+            title: "This is your following apps",
+            content: "The max is 100 Apps"
+          },
+          {
+            element: ".top-charts",
+            title: "Top charts Section",
+            content: "Top 5 Apps by country and market"
+          },
+          {
+            element: ".top-charts-market",
+            title: "Top charts Section",
+            content: "Clicking change market"
+          },
+          {
+            element: ".top-charts-country",
+            title: "Top charts Section",
+            content: "dropdown list change country"
+          },
+          {
+            element: ".top-charts-category",
+            title: "Top charts Section",
+            content: "dropdown list change category"
+          },
+          {
+            element: ".top-charts-more",
+            title: "Top charts Section",
+            content: "Clicking view more apps"
+          }
+        ]});
+
+        // Initialize the tour
+        tour.init();
+
+        // Start the tour
+        tour.restart();
+    });
+
+    
 }
 
 
