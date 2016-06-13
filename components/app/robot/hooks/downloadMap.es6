@@ -7,7 +7,7 @@ import {blurBg, restoreBg} from '../../ui'
 
 function render(){
     $("#download_map_ctn").show()
-    
+
     var latlong = {};
     latlong.AD = {'latitude':42.5, 'longitude':1.5};
     latlong.AE = {'latitude':24, 'longitude':54};
@@ -435,8 +435,8 @@ function render(){
     let option = {
         backgroundColor: '#404a59',
         title : {
-            text: 'World Population (2011)',
-            subtext: 'From Gapminder',
+            text: 'World Downloads(June)',
+            subtext: 'From Appannie',
             left: 'center',
             top: 'top',
             textStyle: {

@@ -17,6 +17,7 @@ let list = [
 function commonHook(word, eve){
     if(word.match(/[cC]lear\s*([sS]tage)?/)){
         $('.chart-docker-body').empty()
+        $('.map-docker').empty().hide()
         $('.chart-docker').hide();
         restoreBg();
 
