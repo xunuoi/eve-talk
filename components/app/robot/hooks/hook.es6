@@ -7,9 +7,13 @@ import {blurBg, restoreBg, loadingCover} from '../../ui'
 import {compareApp} from './compareApp'
 import {downloadMap} from './downloadMap'
 
+import {landingGuide} from './landingGuide'
+
 
 let list = [
     help,
+    landingGuide,
+    
     downloadMap,
     compareApp
 ]

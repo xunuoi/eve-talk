@@ -2,6 +2,30 @@
  * For stage
  */
 
+
+// for filter =======================
+
+.transFilter {
+    -webkit-transition: -webkit-filter 0.3s ease-in;
+    -moz-transition: -moz-filter 0.3s ease-in;
+    transition: -webkit-filter 0.3s ease-in;
+}
+
+body .blur-stage {
+    -webkit-filter: blur(12px);
+    filter: blur(12px);
+    @extend .transFilter;
+}
+
+body .restore-stage {
+    -webkit-filter: none;
+    filter: none;
+    @extend .transFilter;
+}
+
+
+
+// for dashboard stage ======
 .stage-overlay {
     visibility: hidden;
     opacity: 0;
@@ -62,26 +86,25 @@
         min-height: 320px;
         background-color: #000;
     }
+
+    .add-favorite-btn.favorited{
+        i {
+            color: #BF291E;
+        }
+
+    }
 }
 
 
 
+// for favorite stage ======
 
-.transFilter {
-    -webkit-transition: -webkit-filter 0.3s ease-in;
-    -moz-transition: -moz-filter 0.3s ease-in;
-    transition: -webkit-filter 0.3s ease-in;
+.favorite-docker {
+
+    .flot-chart-content.chart-docker-body {
+        height: 140px;
+        padding: 0;
+    } 
 }
 
-body .blur-stage {
-    -webkit-filter: blur(12px);
-    filter: blur(12px);
-    @extend .transFilter;
-}
-
-body .restore-stage {
-    -webkit-filter: none;
-    filter: none;
-    @extend .transFilter;
-}
 

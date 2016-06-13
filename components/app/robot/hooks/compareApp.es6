@@ -7,21 +7,27 @@ import {blurBg, restoreBg} from '../../ui'
 
 let $stage
 
+Highcharts.setOptions({  
+       colors: ['#50B432','#058DC7', '#ED561B','#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']  
+})
 
-function downloadLineChart(){
-    $stage.find('.chart-docker[data-target="compare"]').show().find('.chart-docker-body').highcharts({
+function downloadLineChart($ctn, isSimple){
+    $ctn = $ctn || $stage.find('.chart-docker[data-target="compare"]')
+
+    $ctn.show()
+    .find('.chart-docker-body').highcharts({
         chart: {
             type: 'line'
         },
         title: {
-            text: 'Download Comparison in Last Week'
+            text: isSimple ? false : 'Download Comparison in Last Week'
         },
         xAxis: {
             categories: ['1', '2', '3', '4', '5', '6', '7']
         },
         yAxis: {
             title: {
-                text: 'Count (M)'
+                text: isSimple ? false : 'Count (M)'
             }
         },
         credits: {
@@ -38,18 +44,20 @@ function downloadLineChart(){
 }
 
 
-function revenueColumnChart(){
+function revenueColumnChart($ctn, isSimple){
+    $ctn = $ctn || $stage.find('.chart-docker[data-target="compare-download"]')
 
-    $stage.find('.chart-docker[data-target="compare-download"]').show().find('.chart-docker-body')
+    $ctn.show()
+    .find('.chart-docker-body')
     .highcharts({
         chart: {
             type: 'column'
         },
         title: {
-            text: 'Revenue Comparison'
+            text: isSimple ? false : 'Revenue Comparison'
         },
         /*subtitle: {
-            text: 'Source: WorldClimate.com'
+            text: 'Source: appannie.com'
         },*/
         xAxis: {
             categories: [
@@ -62,7 +70,7 @@ function revenueColumnChart(){
         yAxis: {
             min: 0,
             title: {
-                text: 'Revenue (M)'
+                text:  isSimple ? false : 'Revenue (M)'
             }
         },
         tooltip: {
@@ -136,7 +144,7 @@ function compareAppSession(word, eve){
 
     if(word.match(/[a|A]dd\s+(to\s+)?favorites?/)){
         
-        // $('.chart-docker').addClass('ani-to-favorite')
+        $('.stage-docker .add-favorite-btn').addClass('favorited')
 
         eve.showResponse({
             placeholder: 'Add to favorite',
@@ -158,12 +166,24 @@ function compareAppSession(word, eve){
 }
 
 
+function bindFavorite(){
+    $('.stage-docker').on('click', '.add-favorite-btn', function(event) {
+        
+        $(this).toggleClass('favorited')
+
+        return false
+    })
+}
+
+
 $(()=>{
     $stage = $('.stage-docker')
+
+    bindFavorite()
 })
 
 
-export function compareApp(word, eve){
+function compareApp(word, eve){
 
     if(word.match('compare')){
         eve.showResponse({
@@ -175,4 +195,11 @@ export function compareApp(word, eve){
 
         return false;
     }
+}
+
+export {
+    compareApp,
+
+    revenueColumnChart,
+    downloadLineChart
 }

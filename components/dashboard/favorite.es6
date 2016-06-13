@@ -1,6 +1,7 @@
+import * as compareChart from '../app/robot/hooks/compareApp'
 
-$(function () {
 
+function otherChart(argument) {
     /**
      * Flot charts line data and options
      */
@@ -151,4 +152,21 @@ $(function () {
     };
 
     // $.plot($("#flot-line-chart"), lineChartData, lineChartOptions);
-});
+
+}
+
+
+function renderCompareChart(){
+    // alert('nimd')
+    compareChart.revenueColumnChart($('.favorite-docker[data-target="revenue"]'), true)
+
+    compareChart.downloadLineChart($('.favorite-docker[data-target="downloads"]'), true)
+}
+
+
+
+$(()=>{
+    otherChart()
+
+    renderCompareChart()
+})
