@@ -33,14 +33,14 @@ function parseContent(data){
                         status: 3,
                         message: 'Got it',
                         data: 'I know this: '+rsAns,
-                        emoji: 'lalala'
+                        // emoji: 'lalala'
                     });
                 }else {
                     rs = ut.ansFormat({
                         status: 2,
                         message: 'failed',
                         data: 'Sorry, I can\'t answer you. Can you <a class="f-blue" href="javascript:;">teach me</a> by the format of <i class="f-red">Q::A</i> ?',
-                        emoji: 'shy'
+                        // emoji: 'shy'
                     });
                 }
 

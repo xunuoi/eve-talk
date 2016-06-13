@@ -4,15 +4,24 @@
 
 import {blurBg, restoreBg} from '../../ui'
 
+let currentChart
 
 function doRender(opts){
     $('#download_map_ctn').empty().show()
     var mapChart = echarts.init($('#download_map_ctn')[0])
 
     mapChart.setOption(opts)
+
+    mapChart.on('click', function (params) {
+        // console.log(params)
+        if(params.name == 'China'){
+            renderChina()
+        }
+    });
 }
 
 function renderGlobal(){
+    currentChart = 'global'
     $("#download_map_ctn").show()
 
     var latlong = {};
@@ -523,7 +532,10 @@ function renderGlobal(){
 
 
 function renderChina(){
+    currentChart = 'China'
+
     $("#download_map_ctn").show()
+
     var geoCoordMap = {
         "海门":[121.15,31.89],
         "鄂尔多斯":[109.781327,39.608266],
@@ -1007,7 +1019,7 @@ function renderChina(){
 
 
 export function downloadMap(word, eve) {
-    if(word.match(/download\s+map/)){
+    if(word.match(/(download\s+map)|(global\s+download)/)){
 
         blurBg()
         renderGlobal()
@@ -1027,6 +1039,26 @@ export function downloadMap(word, eve) {
         eve.showResponse({
             placeholder: 'Finished',
             response: 'Check the China Downloads Map.'
+        });
+
+        return false;
+    }
+
+    if(word.match(/\d{4}[\-,\s]+\d{1,2}[\-,\s]+\d{1,2}([\~,\s,\-,(to)]+\s*\d{4}[\-,\s]+\d{1,2}[\-,\s]+\d{1,2})?/)){
+        let date_str = word.match(/\d{4}\-\d{1,2}\-\d{1,2}/)[0]
+
+        blurBg()
+        if(currentChart == 'global'){
+            renderGlobal()
+        }else if(currentChart == 'China'){
+            renderChina()
+        }else {
+            renderGlobal()
+        }
+
+        eve.showResponse({
+            placeholder: 'Finished',
+            response: `Global Downloads Map in <i>${date_str}</i>`
         });
 
         return false;

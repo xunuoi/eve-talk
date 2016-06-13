@@ -187,7 +187,7 @@ function learn (str) {
         status: 101,
         message: 'OK',
         data: 'Thanks, I got it.',
-        emoji: 'yeah'
+        // emoji: 'yeah'
 
     });
  /*   $.log('=== *** === *** ===');
@@ -208,7 +208,7 @@ function answer (a) {
             status: 7,
             message: 'failed',
             data: 'Please say something,do not keep it blank',
-            emoji: 'dance'
+            // emoji: 'dance'
         });
     }
     a = a.toLocaleLowerCase();
@@ -270,7 +270,7 @@ function answer (a) {
                 status: 2,
                 message: 'failed',
                 data: 'Sorry, I can\'t answer you. Can you <a class="f-blue" href="javascript:;">teach me</a> by the format of <i class="f-red">Q::A</i> ?',
-                emoji: 'shy'
+                // emoji: 'shy'
             });
 
         }

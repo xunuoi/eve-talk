@@ -122,7 +122,7 @@ function compareAppSession(word, eve){
         eve.showResponse({
             placeholder: 'download chart',
             response: 'The download status',
-            emoji: 'cute'
+            // emoji: 'cute'
         })
 
         return false
@@ -148,7 +148,7 @@ function compareAppSession(word, eve){
 
         eve.showResponse({
             placeholder: 'Add to favorite',
-            response: 'Add to favorite succeed!<br /> Click <a href="/favorite" target="_blank" >Favorite</a> link to check it',
+            response: 'Add to Favorite Board succeed!<br /> Click <a href="/favorite" target="_blank" >Favorite</a> link to check it',
             // emoji: 'happy'
         })
 
