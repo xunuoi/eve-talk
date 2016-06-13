@@ -1257,18 +1257,21 @@ module.exports =  {
 		var task = setTimeout(fn, time);
 		return task;
 	},
-	repeatTimer: function(callback,time){
-		var _hash = this.hash = stone.noop;
-		var _fn = this.repeatTimer;
+	repeatTimer: function(callback, time){
+		var _fn = stone.repeatTimer;
 
 		setTimeout(function(){
-		    if(typeof callback == 'function') { callback();}
-		    _hash = _fn;
-			setTimeout(_fn,time);	
-		},time);
+		    if(typeof callback == 'function') {
+		    	callback();
+		    }
+
+			setTimeout(function(){
+				_fn(callback, time)
+			}, time);	
+		}, time);
 	},
 	removeTimer: function(){
-		this.removeTimer.hash = null;
+		this._timerFn = null;
 	},
 	isOpera: function(){
 		var isOpera = typeof opera !== 'undefined' && opera.toString() === '[object Opera]';

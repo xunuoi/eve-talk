@@ -28,7 +28,7 @@ function commonHook(word, eve){
         eve.showResponse({
             placeholder: 'new subject',
             response: 'Stage is clear now'
-        });
+        })
 
     
         eve.releaseStatus()
@@ -39,6 +39,16 @@ function commonHook(word, eve){
     if(word.match(/^[s|S]how\s+[l|L]oading(\s+[u|U][iI])?\b/)){
         eve.selectInput()
         loadingCover()
+        return false
+    }
+
+    if(word.match(/[s|S]witch\s+[s|S]kin/)){
+        eve.switchSkin()
+        eve.showResponse({
+            placeholder: 'okay',
+            response: 'Look at my new skin.'
+        })
+
         return false
     }
 }

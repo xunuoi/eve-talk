@@ -1,8 +1,5 @@
 /*
  * For Robot
- * @Author: Cloud Xu
- * xwlxyjk@gmail.com
- * 31th September 2014 
  */
 
 
@@ -294,21 +291,31 @@ var robot = function(){
         $.cookie('isrobotShow', 'true');
     };
 
+    exports.setActionImg = function(aPath){
+        this.actionImgPath = aPath || localStorage.getItem('actionImgPath') || '/static/app/robot/img/'
+
+        localStorage.setItem('actionImgPath', this.actionImgPath)
+    }
+
     exports.action = function(){
         var _curAction = 'normal';
 
-        var baseImgSrc = conf.imgBasePath || '/static/app/robot/img/';
+        exports.setActionImg(exports.actionImgPath)
+
         $body = $('#x_robot_body');
         $ctn = $('#x_robot_ctn');
 
-        var Action = function(actionName, img, actAuto, injectFn){
+        var Action = function(actionName, imgFile, actAuto, injectFn){
             var $bdImg = $body.find('.x-rb-body-img');
             var actCounter = {};
             var _getCount = function(){
                 return actCounter[this.actionName] || 0;
             };
+
+            var originalImg = imgFile
+
             function actFn(){
-                var imgSrc = baseImgSrc+img;
+                var imgSrc = exports.actionImgPath+imgFile;
                 _curAction = actionName;
 
                 if(imgSrc != $bdImg.attr('src')){
@@ -322,6 +329,10 @@ var robot = function(){
                 }
             };
 
+            actFn.setActionImgFile = function(imgName){
+                imgFile = imgName || originalImg
+            }
+
             actFn.actionName = actionName;
             actFn.count = _getCount;
 
@@ -333,7 +344,7 @@ var robot = function(){
 
         var exp1 = {};
 
-        exp1.sleep = new Action('sleep', '0.png', function(rsSelf){
+        exp1.sleep = new Action('sleep', '0.png', function(_actionRun){
             var t_0 = stone.now();     
             var pos_0 = stone.mousePos();
             var pos_now = stone.mousePos();
@@ -347,8 +358,10 @@ var robot = function(){
 
             stone.repeatTimer(function(){
                 pos_now = stone.mousePos();
+
                 if(pos_now.x0 == pos_0.x0 && pos_now.y0 == pos_0.y0){
-                    rsSelf();
+                    _actionRun()
+
                 }else {
                     exp1[_curAction];
                 }
@@ -359,17 +372,18 @@ var robot = function(){
             }, 5000);
 
         });
-        //exp1.wake = new Action('wake', 'wake.gif')
+        // exp1.wake = new Action('wake', 'wake.gif')
         exp1.hello = new Action('hello', '2.png', function(){
             $body.mouseover(function(event){
                 exports.action.hello();
-            });                
-        });
+            })
+        })
+
         exp1.normal = new Action('normal', '0.png', function(){
             $body.mouseout(function(event){
                 exports.action.normal();
-            });                 
-        });
+            })
+        })
 
         return exp1;
     }();
@@ -458,6 +472,10 @@ var robot = function(){
                 $ctn.css({'left': '60px', 'bottom': '60px'});                        
             });*/
 
+            // for action init
+            // exports.action.normal()
+            exports.initSkin()
+
         };
 
         return exp1;
@@ -471,6 +489,28 @@ var robot = function(){
     }
     exports.selectInput = function(){
         $continput.select()
+    }
+
+    exports.initSkin = function (){
+        this.switchSkin()
+        this.switchSkin()
+        this.action.normal()
+    }
+
+    exports.switchSkin = function(){
+        
+        if(this.actionImgPath.match(/eve\//)){
+            this.setActionImg(this.actionImgPath.replace('eve/', ''))
+            this.action.sleep.setActionImgFile()
+        }else {
+            this.setActionImg(this.actionImgPath+'eve/')
+            this.action.sleep.setActionImgFile('ani_sleep.gif')
+        }
+
+        this.action.hello()
+
+        // console.log(this.actionImgPath)
+        
     }
 
     exports.onInput = function(event){
@@ -546,7 +586,7 @@ var Messenger = function(forWho){
 //WORKFLOW LIST
 var _WorkFlow = {
 
-    robot (){
+    initRobot (){
         robot.auto()
         
     },
@@ -605,11 +645,10 @@ var _WorkFlow = {
         
         socket = io.connect(url);
         enableSocket = true;
-        // window.skt = socket;
+        
         socket.on('connect', function(){
             console.log('*** Socket Connect Succeed ! ***');
-            // window.skt = socket;
-            // alert('connected');
+            
 
             socket.on('event', function(data){});
             socket.on('error', function(err){
@@ -645,9 +684,11 @@ exports.workFlow = function(){
     //end exp1
     return exp1;
 }();
-//****** exported to global;
+
+//****** exported to outside;
 exports.Eve = robot;
 
+// auto 
 exports.auto = function(wlist){
     var self = this;
     var l = wlist.length;
@@ -669,7 +710,7 @@ exports.init = function(conf_){
     conf = conf_
     //init default workFlow
     exports.auto([
-        'robot',
+        'initRobot',
         'speaker',
         // 'parallax', 
         // 'bgTrans',
