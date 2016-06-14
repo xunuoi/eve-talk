@@ -74,14 +74,11 @@ var robot = function(){
     var $ctn, $body, $dialog, $continput, $gobtn, $talkcont   
 
     record = record.init($goinput)
-    //=============================================
-    var exports = {};
-    exports.dialog = function(){
+    //=============================================    
+    function initRobotDialog(){
         $goinput.click(function(event){
-
             $goinput.select();
             stone.killEvent(event)
-  
         }).keydown(function(event){
             // stone.killEvent(event);
             if(event.keyCode === 18){
@@ -105,12 +102,12 @@ var robot = function(){
             }else {
                 // pass
             }
-
         });
+    }
 
-        var exp1 = {};
+    initRobotDialog()
 
-    }();///exports.dialog
+    var exports = {};
     exports.showResponse = function (dataObj, isNotClear) {
         $dialog.show();
         dataObj.placeholder = dataObj.placeholder || 'Chat with me'
@@ -284,11 +281,12 @@ var robot = function(){
 
     exports.hide = function(){
         $('#x_robot_ctn').attr('x-robot-display', 'hide').fadeOut('slow');
-        $.cookie('isrobotShow', 'false');
+        localStorage.setItem('isrobotShow', 'false');
     };
     exports.show = function(){
+        exports.action.normal()
         $('#x_robot_ctn').attr('x-robot-display', 'show').fadeIn();
-        $.cookie('isrobotShow', 'true');
+        localStorage.setItem('isrobotShow', 'true');
     };
 
     exports.setActionImg = function(aPath){
@@ -530,8 +528,16 @@ var robot = function(){
         }
     }
 
+    exports._ready = false
+
     exports.auto = function(){
-        if(stone.ins( $.cookie('isrobotShow'),['true', null]) ){
+        if(stone.ins(localStorage.getItem('isrobotShow'),['true', null]) ){
+            if(this._ready){
+                robot.show()
+                return this
+            }
+
+            this._ready = true
             robot.ui.init();
             robot.show();
         } 
@@ -619,6 +625,19 @@ var _WorkFlow = {
         localStorage['installed'] = true;
     },
 
+    bindToggleButton (){
+
+        $('#robot_switcher').on('click', function(event){
+            if(localStorage.getItem('isrobotShow') == 'true'){
+                robot.hide()
+            }else {
+                localStorage.setItem('isrobotShow', 'true')
+                robot.auto()
+            }
+        })
+
+    },
+
     sayHello () {
         var isInstalled = localStorage['installed'];
 
@@ -687,7 +706,7 @@ exports.workFlow = function(){
 
 //****** exported to outside;
 exports.Eve = robot;
-
+// window.robot = robot
 // auto 
 exports.auto = function(wlist){
     var self = this;
@@ -707,7 +726,7 @@ exports.auto = function(wlist){
 
 //init ==========================
 exports.init = function(conf_){
-    conf = conf_
+    conf = conf_ || conf
     //init default workFlow
     exports.auto([
         'initRobot',
@@ -716,7 +735,8 @@ exports.init = function(conf_){
         // 'bgTrans',
         // 'sayHello',
         'install', 
-        'clearTag'
+        'bindToggleButton'
+        // 'clearTag'
         // 'initSocket'
     ]);
 

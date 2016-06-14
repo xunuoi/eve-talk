@@ -42,12 +42,26 @@ function commonHook(word, eve){
         return false
     }
 
-    if(word.match(/[s|S]witch\s+[s|S]kin/)){
+    if(word.match(/[c|C]hange\s+[s|S]kin/)){
         eve.switchSkin()
         eve.showResponse({
             placeholder: 'okay',
             response: 'Look at my new skin.'
         })
+
+        return false
+    }
+
+    if(word.match(/([q|Q]uit)|([e|E]xit)/)){
+        
+        eve.showResponse({
+            placeholder: 'Bye',
+            response: 'See you later, guy'
+        })
+
+        setTimeout(()=>{
+            $('#robot_switcher').trigger('click')
+        }, 900)
 
         return false
     }

@@ -1,6 +1,6 @@
 
 function landingGuide(word, eve) {
-    if(word.match(/([h|H]ow\s+to\s+)?use\s+filter(\s+\?)?/)){
+    if(word.match(/([h|H]ow\s+to\s+)?use\s+(filter|dashboard|board)(\s+\?)?/)){
         
         eve.showResponse({
             placeholder: 'Check it',

@@ -106,11 +106,14 @@ body .restore-stage {
         padding-top: 10px;
     }
 
-    .add-favorite-btn.favorited{
-        i {
-            color: #BF291E;
-        }
+    .add-favorite-btn{
+        color: #c8ccb8;
 
+        &.favorited{
+            i {
+                color: #FF9800;
+            }
+        }
     }
 }
 

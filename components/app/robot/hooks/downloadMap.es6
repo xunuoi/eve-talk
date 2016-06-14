@@ -17,6 +17,7 @@ function doRender(opts){
         if(params.name == 'China'){
             renderChina()
         }
+        return false
     });
 }
 
@@ -1019,7 +1020,7 @@ function renderChina(){
 
 
 export function downloadMap(word, eve) {
-    if(word.match(/(download\s+map)|(global\s+download)/)){
+    if(word.match(/(download(s)?\s+map)|(global\s+download)/)){
 
         blurBg()
         renderGlobal()

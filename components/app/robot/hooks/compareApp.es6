@@ -144,7 +144,13 @@ function compareAppSession(word, eve){
 
     if(word.match(/[a|A]dd\s+(to\s+)?favorites?/)){
         
-        $('.stage-docker .add-favorite-btn').addClass('favorited')
+        $('.stage-docker .add-favorite-btn')
+        .addClass('favorited')
+        .find('i')
+        .addClass('fa-star')
+        .removeClass('fa-star-o')
+        
+        $(this).toggleClass('favorited')
 
         eve.showResponse({
             placeholder: 'Add to favorite',
@@ -168,7 +174,11 @@ function compareAppSession(word, eve){
 
 function bindFavorite(){
     $('.stage-docker').on('click', '.add-favorite-btn', function(event) {
-        
+        $(this).find('i')
+        // .toggleClass('fa')
+        .toggleClass('fa-star')
+        .toggleClass('fa-star-o')
+
         $(this).toggleClass('favorited')
 
         return false
