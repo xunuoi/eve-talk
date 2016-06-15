@@ -7,7 +7,12 @@ import {blurBg, restoreBg} from '../../ui'
 let currentChart
 
 function doRender(opts){
-    $('#download_map_ctn').empty().show()
+    let $downloadCtn = $('#download_map_ctn'),
+        $stage = $downloadCtn.parents('.stage-docker')
+
+    $downloadCtn.empty()
+    .prependTo($stage).show()
+
     var mapChart = echarts.init($('#download_map_ctn')[0])
 
     mapChart.setOption(opts)

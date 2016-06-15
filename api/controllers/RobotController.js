@@ -35,11 +35,15 @@ export function message(req, res){
                 if(rp['s'][1]){
                     rsAns = rp['s'][1];
                 }
+
+                var googleKeywordLink = 'https://www.google.com/#q=' + rsAns
+                var aHtml = `<a href="${googleKeywordLink}"' target="_blank">${rsAns}</a>`
+
                 if(rsAns){
                     res.json(ut.ansFormat({
                         status: 3,
                         message: 'Got it',
-                        data: 'I know this: '+rsAns,
+                        data: 'I know this: '+aHtml,
                         // emoji: 'lalala'
                     }));
                 }else {

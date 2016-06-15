@@ -293,15 +293,15 @@ exports.init = function(){
 
     ut.get('wordsDict', function(rs){
         G.wordsDict = rs || {};
-        console.log('G.wordDict\n', rs);
+        // console.log('G.wordDict\n', rs);
     });//问答字典
     ut.get('ansDict',function(rs){
         G.ansDict = rs || {};
-        console.log('G.ansDict\n',rs);
+        // console.log('G.ansDict\n',rs);
     });//问答字典
     ut.get('context', function(rs){
         G.context = Context.create(rs);//new Context(rs);
-        console.log('G.context\n',rs);
+        // console.log('G.context\n',rs);
     });//问答字典
 
     console.log('>>Eve Init Succeed!')

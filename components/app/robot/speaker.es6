@@ -6,7 +6,8 @@
 let recognition,
     $go,
     $inputer,
-    eve
+    eve,
+    inRecognizing = false
 
 
 function showResult(rsList){
@@ -20,23 +21,56 @@ function showResult(rsList){
 
 
 function initSpeech(){
-    recognition = new webkitSpeechRecognition()
-      
+    recognition = recognition || new webkitSpeechRecognition()
+    // recognition.lang = 'en-US'
+
     recognition.onresult = function(event) { 
         // console.log(event) 
         showResult(event['results'])
     }
+
+    recognition.onend = function(event) {
+        if($inputer.val() === ''){
+            $inputer.attr('placeholder', 'Sorry, what?')
+        }
+        inRecognizing = false
+    }
+
 }
 
 function onSpeech(){
-
-    $inputer.val('Listening...')
+    
+    $inputer.attr('placeholder', 'Listening...')
+    $inputer.val('')
     // eve.showResponse({
-    //     placeholder: 'speak',
-    //     response: 'I a listening...',
+    //     placeholder: 'Listening...'
+    //     // response: 'Just speak to me'
     // })
-    recognition.start()
+    
+    !inRecognizing && (recognition.start(), inRecognizing = true)
+
 }
+
+
+function voiceSpeak(textToSpeak, byWhom, volume) {
+    //create SpeechSynthesisUtterance的实例
+    var robotUtterance = new SpeechSynthesisUtterance()
+    // robotUtterance.lang = 'en-US'
+
+    var voices = window.speechSynthesis.getVoices()
+    robotUtterance.voice = voices.filter(voice=>voice.name == (byWhom ? byWhom : 'Google US English'))[0]
+
+    robotUtterance.rate = 0.8
+
+    volume !== undefined ? (robotUtterance.volume = volume) : ''
+    // robotUtterance.voice = voices[9]
+    // set text
+    robotUtterance.text = textToSpeak
+    // put into queue
+    window.speechSynthesis.speak(robotUtterance)
+}
+// for Chrome bugs,first voice.
+window.speechSynthesis.getVoices()
 
 
 function init(_eve){
@@ -52,5 +86,6 @@ function init(_eve){
 
 
 export {
-    init
+    init,
+    voiceSpeak
 }

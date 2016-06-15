@@ -80,9 +80,17 @@ var robot = function(){
             $goinput.select();
             stone.killEvent(event)
         }).keydown(function(event){
+            var event = event.originalEvent
             // stone.killEvent(event);
-            if(event.keyCode === 18){
+            if(event.code == 'AltLeft'){
                 $('#speaker_btn').trigger('click')
+                return false
+            }
+            if(event.code == 'AltRight'){
+                /*var curText = $talkcont.text()
+
+                curText && speaker.voiceSpeak(curText)*/
+                exports.voiceSpeak()
                 return false
             }
 
@@ -117,7 +125,9 @@ var robot = function(){
         $gobtn.find('.x-rb-goimg').attr('src', robotConf.getB64Img('arrow_0'));
         
         var emojiImg = dataObj.emoji ? emoji.get(dataObj.emoji) : ''
-        
+
+        // dataObj.response === undefined ? (dataObj.response = '') : ''
+
         $talkcont.html(emojiImg+dataObj.response).slideDown();
 
         $continput.select()
@@ -509,6 +519,13 @@ var robot = function(){
 
         // console.log(this.actionImgPath)
         
+    }
+
+    exports.voiceSpeak = function(_text, byWhom){
+        var curText = _text || $talkcont.text()
+        curText && speaker.voiceSpeak(curText, byWhom)
+
+        $goinput.select()
     }
 
     exports.onInput = function(event){

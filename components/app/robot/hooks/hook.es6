@@ -65,6 +65,54 @@ function commonHook(word, eve){
 
         return false
     }
+
+    // for audio listen
+    let listenRs
+    if(listenRs = word.match(/[s|S]peak\s+out(\s+by\s+)?([\w\s]+$)?/)){
+        var pron = listenRs[1]
+        var byWhom = listenRs[2]
+
+        if(byWhom == 'Andrew') {
+            byWhom = 'Alex'
+        }
+        // console.log(byWhom)
+
+        eve.voiceSpeak(null, pron && byWhom ? byWhom : null)
+
+        listenRs = null
+
+        return false
+    }
+
+    if(word.match(/[s|S]how\s+speakers?/)){
+        // for first speak 
+        window.speechSynthesis.getVoices()
+        // get result
+        var voices = window.speechSynthesis.getVoices()
+
+        let sList = voices.filter(voice=>voice.lang == 'en-US')
+
+        var sHtml = 'Below:<br />'
+        sList.forEach((item, index)=>{
+            sHtml += `${item.name}, `
+        })
+
+        eve.showResponse({
+            placeholder: 'Check it',
+            response: sHtml
+        })
+
+        return false
+    }
+
+
+    if(word.match(/(stop\s+speaking)|sp/)){
+        eve.setInput('Okay')
+        eve.selectInput()
+        window.speechSynthesis.cancel()
+
+        return false
+    }
 }
 
 

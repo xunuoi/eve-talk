@@ -7,12 +7,13 @@ import {blurBg, restoreBg} from '../../ui'
 
 let $stage
 
+
 Highcharts.setOptions({  
        colors: ['#50B432','#058DC7', '#ED561B','#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']  
 })
 
 function downloadLineChart($ctn, isSimple){
-    $ctn = $ctn || $stage.find('.chart-docker[data-target="compare"]')
+    $ctn = $ctn || $stage.find('.chart-docker[data-target="compare"]').prependTo($stage)
 
     $ctn.show()
     .find('.chart-docker-body').highcharts({
@@ -45,7 +46,7 @@ function downloadLineChart($ctn, isSimple){
 
 
 function revenueColumnChart($ctn, isSimple){
-    $ctn = $ctn || $stage.find('.chart-docker[data-target="compare-download"]')
+    $ctn = $ctn || $stage.find('.chart-docker[data-target="compare-download"]').prependTo($stage)
 
     $ctn.show()
     .find('.chart-docker-body')
@@ -101,7 +102,7 @@ function revenueColumnChart($ctn, isSimple){
 }
 
 function compareAppSession(word, eve){
-    if(word.match('[sS]top')){
+    if(word.match(/[sS]top(\s+[c|C]ompare)?/)){
         eve.releaseStatus()
 
         eve.showResponse({
@@ -160,11 +161,10 @@ function compareAppSession(word, eve){
 
         return false
     }
-
-
+    
     eve.showResponse({
         placeholder: 'which app',
-        response: 'Just input the app name'
+        response: 'Please enter the app\'s name in the situation'
     });
 
     return false
@@ -206,9 +206,11 @@ $(()=>{
 function compareApp(word, eve){
 
     if(word.match('compare')){
+        var sentence = 'Which app do you want to compare with ?'
+
         eve.showResponse({
             placeholder: 'which app',
-            response: 'Which app do you want to comare with ?'
+            response: sentence
         });
 
         eve.lockStatus(compareAppSession)
