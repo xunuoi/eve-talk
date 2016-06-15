@@ -26,7 +26,7 @@ function commonHook(word, eve){
         restoreBg();
 
         eve.showResponse({
-            placeholder: 'new subject',
+            placeholder: 'Enter new subject',
             response: 'Stage is clear now'
         })
 
@@ -66,6 +66,17 @@ function commonHook(word, eve){
         return false
     }
 
+
+    // for listening
+    if(word.match(/[l|L]isten/)){
+        
+        $('#speaker_btn').trigger('click')
+
+        
+        return false
+    }
+
+
     // for audio listen
     let listenRs
     if(listenRs = word.match(/[s|S]peak\s+out(\s+by\s+)?([\w\s]+$)?/)){
@@ -84,6 +95,7 @@ function commonHook(word, eve){
         return false
     }
 
+    // show speakers
     if(word.match(/[s|S]how\s+speakers?/)){
         // for first speak 
         window.speechSynthesis.getVoices()

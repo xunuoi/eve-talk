@@ -102,12 +102,12 @@ function revenueColumnChart($ctn, isSimple){
 }
 
 function compareAppSession(word, eve){
-    if(word.match(/[sS]top(\s+[c|C]ompare)?/)){
+    if(word.match(/^[sS]top(\s+[c|C]ompare)?$/)){
         eve.releaseStatus()
 
         eve.showResponse({
             placeholder: 'next chat',
-            response: 'Compare stoped. Thanks. Try another task'
+            response: 'Compare stoped. Try other things'
         })
 
         return false
@@ -116,7 +116,7 @@ function compareAppSession(word, eve){
         // return 'hello'
     }
 
-    if(word.match(/[dD]ownload\s*/)){
+    if(word.match(/^[dD]ownload\s*/)){
 
         downloadLineChart()
 
@@ -136,7 +136,7 @@ function compareAppSession(word, eve){
 
         eve.showResponse({
             placeholder: 'compare result',
-            response: 'Check the chart we got!',
+            response: 'Wechat Revenue has 33.7 less than Facebook in Quarter 1',
             // emoji: 'happy'
         })
 
@@ -205,7 +205,7 @@ $(()=>{
 
 function compareApp(word, eve){
 
-    if(word.match('compare')){
+    if(word.match(/^compares/)){
         var sentence = 'Which app do you want to compare with ?'
 
         eve.showResponse({
