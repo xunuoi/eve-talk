@@ -1025,7 +1025,7 @@ function renderChina(){
 
 
 export function downloadMap(word, eve) {
-    if(word.match(/([d|D]ownload(s)?\s+map)|([g|G]lobal\s+[d|D]ownloads?)/)){
+    if(word.match(/^([d|D]ownload(s)\s+map)|([g|G]lobals?\s+[d|D]ownloads?)/)){
 
         blurBg()
         renderGlobal()
@@ -1038,7 +1038,7 @@ export function downloadMap(word, eve) {
         return false;
     }
 
-    if(word.match(/([i|I]n\s+)?[C|c]hina/)){
+    if(word.match(/^([i|I]n\s+)?[C|c]hina$/)){
         blurBg()
         renderChina()
 

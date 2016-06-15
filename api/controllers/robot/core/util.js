@@ -54,7 +54,9 @@ var ut = {
         var db = createClient()
 
         db.set('wordsDict', JSON.stringify(G.wordsDict))
+
         db.set('ansDict', JSON.stringify(G.ansDict))
+
         db.set('context', JSON.stringify(G.context))
         console.log('>> Redis save succeed.')
     },

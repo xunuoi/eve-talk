@@ -19,7 +19,7 @@ let list = [
 ]
 
 function commonHook(word, eve){
-    if(word.match(/[cC]lear\s*([sS]tage)?/)){
+    if(word.match(/^[cC]lear\s*([sS]tage)?/)){
         $('.chart-docker-body').empty()
         $('.map-docker').empty().hide()
         $('.chart-docker').hide();
@@ -42,18 +42,18 @@ function commonHook(word, eve){
         return false
     }
 
-    if(word.match(/[c|C]hange\s+[s|S]kin/)){
+    if(word.match(/^[c|C]hange\s+[r|R]ole$/)){
         eve.switchSkin()
         eve.showResponse({
             placeholder: 'okay',
-            response: 'Look at my new skin.'
+            response: 'Hi guy.'
         })
 
         return false
     }
 
-    if(word.match(/([q|Q]uit)|([e|E]xit)/)){
-        
+    if(word.match(/^([q|Q]uit)|([e|E]xit)/)){
+        eve.releaseStatus()
         eve.showResponse({
             placeholder: 'Bye',
             response: 'See you later, guy'
@@ -61,6 +61,10 @@ function commonHook(word, eve){
 
         setTimeout(()=>{
             $('#robot_switcher').trigger('click')
+            eve.showResponse({
+                placeholder: 'new subject',
+                response: ''
+            })
         }, 900)
 
         return false
@@ -68,7 +72,7 @@ function commonHook(word, eve){
 
 
     // for listening
-    if(word.match(/[l|L]isten/)){
+    if(word.match(/^[l|L]isten$/)){
         
         $('#speaker_btn').trigger('click')
 
@@ -79,7 +83,7 @@ function commonHook(word, eve){
 
     // for audio listen
     let listenRs
-    if(listenRs = word.match(/[s|S]peak\s+out(\s+by\s+)?([\w\s]+$)?/)){
+    if(listenRs = word.match(/^[s|S]peak\s+out(\s+by\s+)?([\w\s]+$)?/)){
         var pron = listenRs[1]
         var byWhom = listenRs[2]
 
@@ -96,7 +100,7 @@ function commonHook(word, eve){
     }
 
     // show speakers
-    if(word.match(/[s|S]how\s+speakers?/)){
+    if(word.match(/^[s|S]how\s+speakers?/)){
         // for first speak 
         window.speechSynthesis.getVoices()
         // get result
@@ -104,7 +108,7 @@ function commonHook(word, eve){
 
         let sList = voices.filter(voice=>voice.lang == 'en-US')
 
-        var sHtml = 'Below:<br />'
+        var sHtml = 'Speakers are Below:<br />'
         sList.forEach((item, index)=>{
             sHtml += `${item.name}, `
         })
@@ -118,10 +122,32 @@ function commonHook(word, eve){
     }
 
 
-    if(word.match(/(stop\s+speaking)|sp/)){
+    if(word.match(/^(stop\s+speaking)|sp$/)){
         eve.setInput('Okay')
         eve.selectInput()
         window.speechSynthesis.cancel()
+
+        return false
+    }
+
+    if(word.match(/^fullscreen$/)){
+        try{
+            document.body.webkitRequestFullScreen()
+        }catch(err){
+            alert('Your browser do not support Fullscreen')
+        }
+        
+
+        return false
+    }
+
+    if(word.match(/^cancel\s+fullscreen$/)){
+        try{
+            document.webkitCancelFullScreen()
+        }catch(err){
+            alert('Your browser do not support Fullscreen')
+        }
+        
 
         return false
     }

@@ -36,10 +36,10 @@ function downloadLineChart($ctn, isSimple){
         },
         series: [{
             name: 'Wechat',
-            data: [6, 5, 4, 7, 3, 4,5]
+            data: [6.21, 5.32, 4.12, 6.01, 3.21, 4.30 ,5.20]
         }, {
             name: 'Facebook',
-            data: [5, 6, 4, 6, 5, 7, 8]
+            data: [5.52, 6.03, 4.42, 3.98, 5.21, 7.28, 8.02]
         }]
     })
 }
@@ -77,7 +77,7 @@ function revenueColumnChart($ctn, isSimple){
         tooltip: {
             headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
             pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                '<td style="padding:0"><b>{point.y:.1f} M</b></td></tr>',
             footerFormat: '</table>',
             shared: true,
             useHTML: true
@@ -116,13 +116,13 @@ function compareAppSession(word, eve){
         // return 'hello'
     }
 
-    if(word.match(/^[dD]ownload\s*/)){
+    if(word.match(/^(by\s+)?[dD]ownload\s*/)){
 
         downloadLineChart()
 
         eve.showResponse({
-            placeholder: 'download chart',
-            response: 'The download status',
+            placeholder: 'Download Comparison',
+            response: 'Wechat has 0.69 million downloads more than Facebook in Day 1',
             // emoji: 'cute'
         })
 
@@ -135,8 +135,8 @@ function compareAppSession(word, eve){
         revenueColumnChart()
 
         eve.showResponse({
-            placeholder: 'compare result',
-            response: 'Wechat Revenue has 33.7 less than Facebook in Quarter 1',
+            placeholder: 'Revenue Comparison',
+            response: 'Wechat Revenue has 33.7 million less than Facebook in Quarter 1',
             // emoji: 'happy'
         })
 
@@ -164,7 +164,7 @@ function compareAppSession(word, eve){
     
     eve.showResponse({
         placeholder: 'which app',
-        response: 'Please enter the app\'s name in the situation'
+        response: 'Please enter the [App Name] or [Data] in the situation'
     });
 
     return false
@@ -205,7 +205,7 @@ $(()=>{
 
 function compareApp(word, eve){
 
-    if(word.match(/^compares/)){
+    if(word.match(/^compare(\s+revenue)?$/)){
         var sentence = 'Which app do you want to compare with ?'
 
         eve.showResponse({

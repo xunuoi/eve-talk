@@ -36,8 +36,8 @@ body .restore-stage {
     background-color: rgba(0, 0, 0, 0.36);
     z-index: 991;
 
-    -webkit-transition: opacity 0.3s ease-in;
-    transition: opacity 0.3s ease-in;
+    -webkit-transition: opacity 0.3s ease-in, visibility 0.3s ease-in;
+    transition: opacity 0.3s ease-in, visibility 0.3s ease-in;
 
     &.show {
         visibility: visible;
