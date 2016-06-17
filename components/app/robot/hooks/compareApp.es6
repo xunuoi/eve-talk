@@ -102,12 +102,12 @@ function revenueColumnChart($ctn, isSimple){
 }
 
 function compareAppSession(word, eve){
-    if(word.match(/^[sS]top(\s+[c|C]ompare)?$/)){
+    if(word.match(/^([sS]top|[f|F]inish)(\s+[c|C]ompare)?$/)){
         eve.releaseStatus()
 
         eve.showResponse({
-            placeholder: 'next chat',
-            response: 'Compare stoped. Try other things'
+            placeholder: 'task finished',
+            response: 'Compare task stoped. Try new things'
         })
 
         return false
