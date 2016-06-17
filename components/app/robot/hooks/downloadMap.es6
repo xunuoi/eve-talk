@@ -1025,7 +1025,7 @@ function renderChina(){
 
 
 export function downloadMap(word, eve) {
-    if(word.match(/^([d|D]ownload(s)\s+map)|([g|G]lobals?\s+[d|D]ownloads?)/)){
+    if(word.match(/^([d|D]ownloads?\s+map)|([g|G]lobals?\s+[d|D]ownloads?)/)){
 
         blurBg()
         renderGlobal()

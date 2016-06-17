@@ -100,7 +100,7 @@ function commonHook(word, eve){
     }
 
     // show speakers
-    if(word.match(/^[s|S]how\s+speakers?/)){
+    if(word.match(/^[s|S]how\s+(speaker|voice)s?/)){
         // for first speak 
         window.speechSynthesis.getVoices()
         // get result
@@ -132,7 +132,9 @@ function commonHook(word, eve){
 
     if(word.match(/^fullscreen$/)){
         try{
-            document.body.webkitRequestFullScreen()
+            document.documentElement.webkitRequestFullScreen()
+            eve.setInput('Okay')
+            eve.selectInput()
         }catch(err){
             alert('Your browser do not support Fullscreen')
         }
