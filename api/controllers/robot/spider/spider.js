@@ -5,7 +5,7 @@ var http = require('http');
 // var jqMod = require("jquery");
 var fs = require('fs');
 
-var Iconv = require('iconv').Iconv;
+var iconv = require('iconv-lite');
 
 String.format = function() { 
     var s = arguments[0]; 
@@ -54,62 +54,16 @@ function spider (url, cb){
 	            pos += chunks[i].length;
 	        }
 			//buffer不支持GBK
-	        var gbk_to_utf8_iconv = new Iconv('GBK', 'UTF-8//TRANSLIT//IGNORE');
+	        /*var gbk_to_utf8_iconv = new Iconv('GBK', 'UTF-8//TRANSLIT//IGNORE');
 	        var utf8_buffer = gbk_to_utf8_iconv.convert(buffer);
+	        var htmlSource = utf8_buffer.toString();*/
 
-	        var htmlSource = utf8_buffer.toString();
+	        // var chunkAll = Buffer.concat(arrBuf, bufLength);   
+        	var htmlSource = iconv.decode(buffer,'GBK');
+
 	        cb ? cb(htmlSource) : "";
 	  	});
 	})
-	/*http.sGet(url, function(res) {
-	    var size = 0;
-	    var chunks = [];
-		res.on('data', function(chunk){
-		    size += chunk.length;
-		    chunks.push(chunk);
-		});
-	  	res.on('end', function(){
-
-	    	var buffer = new Buffer(size), pos = 0;
-
-	        for(var i = 0, l = chunks.length; i < l; i++) {
-	            chunks[i].copy(buffer, pos);
-	            pos += chunks[i].length;
-	        }
-			//buffer不支持GBK
-	        var gbk_to_utf8_iconv = new Iconv('GBK', 'UTF-8//TRANSLIT//IGNORE');
-	        var utf8_buffer = gbk_to_utf8_iconv.convert(buffer);
-
-	        var htmlSource = utf8_buffer.toString();
-
-	        jsdom.env({  
-				html: htmlSource,
-				scripts: [
-					'http://static.vzhen.com/h5/lib/jquery/jquery-2.1.1.min.js'
-				],
-				done: function (err, window) {
-					var $ = window.jQuery;	
-					//release memory
-					buffer = null;
-					htmlSource = null;
-					gbk_to_utf8_iconv = null;
-					utf8_buffer = null
-
-					//--------------
-					cb ? cb($) : '';
-
-				},
-				fail: function(e){
-					console.log('******E:', e);
-					
-				}
-			});
-
-	  	});
-
-	}).on('error', function(e) {
-	 	console.log("Got error: " + e.message);
-	});*/
 
 }
 
