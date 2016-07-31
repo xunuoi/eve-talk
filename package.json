@@ -5,6 +5,8 @@
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
     "include-all": "~0.1.6",
     "rc": "1.0.1",
     "sails": "~0.12.3",

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh" >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>App Details</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="author" content="appannie">
+<meta name="version" content="1.0">
+<link rel="icon" href="/static/favicon.ico">
+<link rel="stylesheet" type="text/css" href="/static/app/main.093b53c9.css">
+</head>
+<body id="bg_scene">
+<canvas data-depth="0.40" class="canvas layer"></canvas>
+<div class="introduce-wrapper hide">
+<p>Appannie</p>
+</div>
+
+{% include 'app/content.html' %}
+
+
+{% include 'app/bg.html' %}
+{% include 'app/robot/robot.html' %}
+{% include 'app/common_script.html' %}
+
+<script type="text/javascript" src="/static/app/main.e7e7a35e.js"></script>
+</body>
+</html>

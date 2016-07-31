@@ -2,6 +2,9 @@
   "generators": {
     "modules": {}
   },
+  "paths": {
+    "views": "./views_dist"
+  },
   "hooks": {
     "grunt": false
   }
