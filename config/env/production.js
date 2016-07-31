@@ -44,7 +44,7 @@ module.exports = {
           swig.setDefaults({
             // 'cache': true,//needn't restart 
             'loader': swig.loaders.fs('./views_dist')
-            // 'debug': false
+            'debug': false
           })
           return swig.renderFile(pathName, locals, cb);
         } 
