@@ -30,7 +30,7 @@ module.exports.views = {
   *                                                                           *
   ****************************************************************************/
 
-  engine: {
+/*  engine: {
     'name': 'swig',
     'ext': 'html',
     fn: function (pathName, locals, cb) {
@@ -42,7 +42,7 @@ module.exports.views = {
       return swig.renderFile(pathName, locals, cb);
     } 
 
-  },
+  },*/
 
 
   /****************************************************************************

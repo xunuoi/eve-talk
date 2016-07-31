@@ -20,5 +20,21 @@ module.exports = {
   // models: {
   //   connection: 'someMongodbServer'
   // }
+  port: 1389,
+  views: {
+  	  engine: {
+	    'name': 'swig',
+	    'ext': 'html',
+	    fn: function (pathName, locals, cb) {
+	      var swig = require('swig')
+	      swig.setDefaults({
+	        'cache': false,//needn't restart 
+	        'loader': swig.loaders.fs('./views')
+	      })
+	      return swig.renderFile(pathName, locals, cb);
+	    } 
+
+	  },
+  }
 
 };

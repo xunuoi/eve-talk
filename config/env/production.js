@@ -25,7 +25,7 @@ module.exports = {
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
 
-  // port: 80,
+  port: 1390,
 
   /***************************************************************************
    * Set the log level in production environment to "silent"                 *
@@ -34,5 +34,20 @@ module.exports = {
   // log: {
   //   level: "silent"
   // }
+  // 
+  'views': {
+      engine: {
+        'name': 'swig',
+        'ext': 'html',
+        fn: function (pathName, locals, cb) {
+          var swig = require('swig')
+          swig.setDefaults({
+            'cache': true,//needn't restart 
+            'loader': swig.loaders.fs('./views_dist')
+          })
+          return swig.renderFile(pathName, locals, cb);
+        } 
+    }
+  }
 
 };
