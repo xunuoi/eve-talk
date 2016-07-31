@@ -15,19 +15,19 @@ gulpman.config({
     
     //'cdn_prefix': '', 
 
-    'url_prefix': '/static',
+    // 'url_prefix': '/static',
 
-    'components': 'components',
+    // 'components': 'components',
 
-    'runtime_views': 'views',
-    'dist_views': 'views_dist',
+    // 'runtime_views': 'views',
+    // 'dist_views': 'views_dist',
 
-    'runtime_assets': 'static',
-    'dist_assets': 'static_static',
+    // 'runtime_assets': 'assets',
+    // 'dist_assets': 'assets_dist',
 
-    'lib': 'lib', 
+    // 'lib': 'lib', 
 
     'global': 'common' 
-    
+    // 
 })
 
