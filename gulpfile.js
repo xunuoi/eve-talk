@@ -27,7 +27,7 @@ gulpman.config({
 
     // 'lib': 'lib', 
 
-    'global': 'common' 
+    // 'global': 'common' 
     // 
 })
 
