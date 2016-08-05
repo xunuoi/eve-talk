@@ -487,7 +487,7 @@ function renderGlobal(){
         geo: {
             name: 'Global Downloads(June)',
             type: 'map',
-            map: 'worldmap',
+            map: 'world',
             roam: true,
             label: {
                 emphasis: {
@@ -787,7 +787,7 @@ function renderChina(){
             }
         },
         geo: {
-            map: 'chinamap',
+            map: 'china',
             label: {
                 emphasis: {
                     show: false
@@ -1025,7 +1025,7 @@ function renderChina(){
 
 
 export function downloadMap(word, eve) {
-    if(word.match(/^([d|D]ownloads?\s+map)|([g|G]lobals?\s+[d|D]ownloads?)/)){
+    if(word.match(/^([d|D]ownloads?\s+[m|M]aps?)|([g|G]lobals?\s+[d|D]ownloads?)/)){
 
         blurBg()
         renderGlobal()
