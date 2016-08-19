@@ -19,6 +19,10 @@ module.exports = {
     },
     insightsDetail: function(req, res){
         res.render('dashboard/insights_detail')
+    },
+
+    test: function(req, res){
+        res.render('testload/test')
     }
 };
 

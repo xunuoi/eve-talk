@@ -42,7 +42,7 @@ module.exports = {
         fn: function (pathName, locals, cb) {
           var swig = require('swig')
           swig.setDefaults({
-            // 'cache': true,//needn't restart 
+            'cache': false,//needn't restart 
             'loader': swig.loaders.fs('./views_dist')
           })
           return swig.renderFile(pathName, locals, cb);

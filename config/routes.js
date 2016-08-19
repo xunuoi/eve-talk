@@ -39,7 +39,11 @@ module.exports.routes = {
   '/insights': 'DetailController.insights',
   '/insights/detail': 'DetailController.insightsDetail',
 
-  '/message': 'RobotController.message'
+  '/test': 'DetailController.test',
+
+  '/message': 'RobotController.message',
+
+  '/rainy': 'RainyController'
 
   /***************************************************************************
   *                                                                          *
