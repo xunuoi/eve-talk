@@ -36,8 +36,8 @@ class Dancer {
             engine.rain([ [3, 3, 0.88], [5, 5, 0.9], [6, 2, 1] ], 100);
             window.eg = engine
             console.info(engine.prepareBackground)
-           
-            var engine1 = new RainyDay({
+            
+            /*var engine1 = new RainyDay({
                 id: 'myDancer_1',
                 element: img_dancer_1,
                 image: img_dancer_1,
@@ -50,14 +50,14 @@ class Dancer {
 
             engine1.rain([ [3, 3, 0.88], [5, 5, 0.9], [6, 2, 1] ], 100);
 
-            return [engine, engine1];
+            return [engine, engine1];*/
         }
 
         window.onload = function(){
             rainList = runRain();
-            canvas = rainList[0].canvas;
+            // canvas = rainList[0].canvas;
 
-            dancer.slideDancer(rainList);
+            // dancer.slideDancer(rainList);
         }
     }
 

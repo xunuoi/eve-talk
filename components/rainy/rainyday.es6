@@ -3,6 +3,8 @@
  * @param options options element with script parameters
  * @param canvas to be used (if not defined a new one will be created)
  */
+
+let bgAlpha = 1
  
 class RainyDay {
 
@@ -41,10 +43,15 @@ class RainyDay {
                 options[option] = defaults[option];
             }
         }
+
         //@Cloud debug
         this.options = options;
 
         this.drops = [];
+
+        // set polyfill of requestAnimationFrame
+        this.setRequestAnimFrame();
+
         // prepare canvas elements
         this.canvas = canvas || this.prepareCanvas();
         this.prepareBackground();
@@ -56,8 +63,6 @@ class RainyDay {
         this.gravity = this.GRAVITY_NON_LINEAR;
         this.collision = this.COLLISION_SIMPLE;
 
-        // set polyfill of requestAnimationFrame
-        this.setRequestAnimFrame();
     }
 
     /**
@@ -509,8 +514,8 @@ class RainyDay {
 
         var context = this.background.getContext('2d');
         context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         context.drawImage(this.img, this.options.crop[0], this.options.crop[1], this.options.crop[2], this.options.crop[3], 0, 0, this.canvas.width, this.canvas.height);
+
 
         context = this.clearbackground.getContext('2d');
         context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -530,6 +535,7 @@ class RainyDay {
         this.clearbackground.height = this.canvas.height;
 
         this.drawCanvasImage(img)
+        this.canvasImageFadeAnimate()
 
         if (!isNaN(this.options.blur) && this.options.blur >= 1) {
             this.stackBlurCanvasRGB(this.canvas.width, this.canvas.height, this.options.blur);
@@ -550,6 +556,27 @@ class RainyDay {
         this.canvas.height = this.options.height
 
         this.prepareBackground(newImg)
+    }
+
+    canvasImageFadeAnimate () {
+        function _bgImageFade(){
+            var context = this.background.getContext('2d');
+
+            if(bgAlpha > 0){
+                bgAlpha -= 0.01
+                context.globalAlpha = bgAlpha
+            }else {
+                return
+            }
+            console.info(context.globalAlpha)
+
+            context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            context.drawImage(this.img, this.options.crop[0], this.options.crop[1], this.options.crop[2], this.options.crop[3], 0, 0, this.canvas.width, this.canvas.height);
+
+            window.requestAnimFrame(_bgImageFade.bind(this))
+        }
+
+        window.requestAnimFrame(_bgImageFade.bind(this))
     }
 
 
