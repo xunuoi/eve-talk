@@ -13,10 +13,13 @@ var robotConf = require('./robot.config'),
     bg = require('../bgTrans');
 
 //config set
-var conf = {}, enableSocket = false;
+var conf = {}, 
+    socket,
+    enableSocket = false
 
-var socket;
 
+const _defaultAnnieImg =  '/static/app/robot/img/eve/'
+// const _defaultAnnieImg =  '/static/app/robot/img/'
 // remove a workflow
 var Kill = function(tar){
     if(tar ==  undefined) {return false; }
@@ -300,7 +303,7 @@ var robot = function(){
     };
 
     exports.setActionImg = function(aPath){
-        this.actionImgPath = aPath || localStorage.getItem('actionImgPath') || '/static/app/robot/img/'
+        this.actionImgPath = aPath || localStorage.getItem('actionImgPath') || _defaultAnnieImg
 
         localStorage.setItem('actionImgPath', this.actionImgPath)
     }
@@ -500,19 +503,27 @@ var robot = function(){
     }
 
     exports.initSkin = function (){
-        this.switchSkin()
-        this.switchSkin()
+        if(this.actionImgPath.match(/eve\//)){
+            this.action.sleep.setActionImgFile('ani_sleep.gif')
+        }
         this.action.normal()
     }
 
     exports.switchSkin = function(){
         
-        if(this.actionImgPath.match(/eve\//)){
-            this.setActionImg(this.actionImgPath.replace('eve/', ''))
-            this.action.sleep.setActionImgFile()
-        }else {
-            this.setActionImg(this.actionImgPath+'eve/')
+        // use eve
+        if(this.actionImgPath.match(/bonnie\//)){
+            this.setActionImg(_defaultAnnieImg+'eve/')
             this.action.sleep.setActionImgFile('ani_sleep.gif')
+            
+        // use bonnie
+        }else if(!this.actionImgPath.match(/bonnie\//) && !this.actionImgPath.match(/eve\//)) {
+            this.setActionImg(_defaultAnnieImg+'bonnie/')
+            this.action.sleep.setActionImgFile()
+        // use default
+        }else {
+            this.setActionImg(_defaultAnnieImg)
+            this.action.sleep.setActionImgFile()
         }
 
         this.action.hello()

@@ -117,7 +117,7 @@ function compareAppSession(word, eve){
     }
 
     if(word.match(/^(by\s+)?[dD]ownload\s*/)){
-
+        blurBg()
         downloadLineChart()
 
         eve.showResponse({
