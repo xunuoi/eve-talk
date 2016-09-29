@@ -18,8 +18,8 @@ var conf = {},
     enableSocket = false
 
 
-const _defaultAnnieImg =  '/static/app/robot/img/'
-
+const _defaultAnnieImg =  '/static/app/robot/img/eve/'
+// const _defaultAnnieImg =  '/static/app/robot/img/'
 // remove a workflow
 var Kill = function(tar){
     if(tar ==  undefined) {return false; }
@@ -503,9 +503,6 @@ var robot = function(){
     }
 
     exports.initSkin = function (){
-        // this.switchSkin()
-        /*this.switchSkin()
-        this.switchSkin()*/
         if(this.actionImgPath.match(/eve\//)){
             this.action.sleep.setActionImgFile('ani_sleep.gif')
         }
