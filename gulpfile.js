@@ -8,7 +8,7 @@ var gulp = require('gulp'),
     gulpman = require('gulpman')
 
 
-// 配置gulpman
+
 gulpman.config({
 
     'is_absolute': true,
