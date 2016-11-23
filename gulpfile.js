@@ -8,7 +8,7 @@ var gulp = require('gulp'),
     gulpman = require('gulpman')
 
 
-// 配置gulpman
+
 gulpman.config({
 
     'is_absolute': true,
@@ -22,8 +22,8 @@ gulpman.config({
     // 'runtime_views': 'views',
     // 'dist_views': 'views_dist',
 
-    // 'runtime_assets': 'assets',
-    // 'dist_assets': 'assets_dist',
+    'runtime_assets': 'assets/static',
+    'dist_assets': 'assets_dist/static',
 
     // 'lib': 'lib', 
 

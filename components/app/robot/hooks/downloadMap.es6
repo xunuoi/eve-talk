@@ -487,7 +487,7 @@ function renderGlobal(){
         geo: {
             name: 'Global Downloads(June)',
             type: 'map',
-            map: 'world',
+            map: 'worldmap',
             roam: true,
             label: {
                 emphasis: {
@@ -787,7 +787,7 @@ function renderChina(){
             }
         },
         geo: {
-            map: 'china',
+            map: 'chinamap',
             label: {
                 emphasis: {
                     show: false
