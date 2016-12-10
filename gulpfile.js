@@ -2,12 +2,12 @@
  * Gulpman demo gulpfile.js
  * Config the gulpman by yourself
  */
-
+'use strict'
 
 var gulp = require('gulp'),
     gulpman = require('gulpman')
 
-
+var puma = require('./puma')
 
 gulpman.config({
 
@@ -31,21 +31,5 @@ gulpman.config({
     // 
 })
 
-
-let path = require('path'),
-    j = path.join
-
-const APP_PATH = {
-    'serviceAPIControllers': './api/controllers',
-    'applications': './applications',
-    'api': 'api',
-    'meta': 'meta'
-}
-
-let apiPath = j(APP_PATH, api, '**.*')
-
-gulp.task('app:sync-api', () => {
-    gulp.src(apiPath)
-    .dest(APP_PATH.serviceAPIControllers)
-})
+puma.enable(gulp)
 

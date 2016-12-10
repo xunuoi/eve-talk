@@ -1,5 +1,10 @@
+
+import jQuery from 'jquery'
+
 function initPage(argument) {
-    alert('inited')
+    setTimeout(() => {
+    	$('.wrap p').html('...Come on! Puma!')
+    }, 1500)
 }
 
 $(() => {
