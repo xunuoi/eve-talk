@@ -31,3 +31,21 @@ gulpman.config({
     // 
 })
 
+
+let path = require('path'),
+    j = path.join
+
+const APP_PATH = {
+    'serviceAPIControllers': './api/controllers',
+    'applications': './applications',
+    'api': 'api',
+    'meta': 'meta'
+}
+
+let apiPath = j(APP_PATH, api, '**.*')
+
+gulp.task('app:sync-api', () => {
+    gulp.src(apiPath)
+    .dest(APP_PATH.serviceAPIControllers)
+})
+
