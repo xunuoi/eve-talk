@@ -16,7 +16,7 @@
 <body class="fixed-navbar fixed-sidebar">
 
 <!-- Simple splash screen-->
-{% include 'dashboard/loading_splash.html' %}
+<!-- {% include 'dashboard/loading_splash.html' %} -->
 
 <!--[if lt IE 7]>
 <p class="alert alert-danger">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -570,7 +570,20 @@
 
 <!-- Vendor scripts -->
 <!-- Common Script -->
+<script type="text/javascript" src="./tesbp/bro.bigpipe.js"></script>
 {% include 'dashboard/common_script.html' %}
 
-</body>
-</html>
+<script type="text/javascript">
+
+// The `karatBP` is the bigpipe-id, it should match the Backend definition. Or you can use '{{_bigpipe_id}}' directly.
+var robotBP = new Bigpipe('robotBP')
+
+// You can subscribe the events which match the backend API `fire`, like fire('tag', data), then you can `on('tag')` in FE js.
+robotBP.on('tag')
+.then(function (data) {
+    console.info(data);
+
+    $('#wrapper').html(data.html)
+})
+
+</script>
