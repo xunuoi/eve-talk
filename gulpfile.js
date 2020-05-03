@@ -29,5 +29,19 @@ gulpman.config({
 
     // 'global': 'common' 
     // 
+});
+
+/**
+ *  *  RESTART PRODUCTION
+ *   */
+gulp.task('rs-prod', function() {
+    sh.exec('pm2 restart robot -x -- --prod')
 })
+/**
+ *  * START PRODUCTION IN SERVER HOST
+ *   */
+gulp.task('s-prod', function() {
+    sh.exec('pm2 start ./app.js --name robot -x -- --prod')
+})
+
 
